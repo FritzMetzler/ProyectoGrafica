@@ -3,7 +3,7 @@
 * Integrantes:
 * -Aguilar González Oscar
 * -Michel Baez
-* -Alejandro
+* -Alejandro Hernández Rodríguez
 
 */
 
