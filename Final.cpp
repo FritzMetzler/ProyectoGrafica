@@ -282,6 +282,7 @@ int main()
 	Model car_1("resources/objects/coche_azul/Muscle_Car_Pack_2.obj");
 	Model car_2("resources/objects/coche_rojo/Muscle_Car_Pack_1.obj");
 	Model car_3("resources/objects/coche_verde/Muscle_Car_Pack_3.obj");
+	Model dino_1("resources/objects/Dilophosaurus/dilophosaurus.obj");
 	//Model car_1("resources/objects/coche_negro/");
 
 	//Model piso("resources/objects/piso/piso.obj");
@@ -427,6 +428,13 @@ int main()
 		model = glm::scale(model, glm::vec3(0.6f));
 		staticShader.setMat4("model", model);
 		car_2.Draw(staticShader);
+
+		// Dino 
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, -2.75f, 0.0f));
+		model = glm::scale(model, glm::vec3(10.0f));
+		staticShader.setMat4("model", model);
+		dino_1.Draw(staticShader);
 
 		/*
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 0.0f, -10.0f));
