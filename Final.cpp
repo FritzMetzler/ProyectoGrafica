@@ -413,6 +413,12 @@ void animate(void)
 			fish_phi_mov += 0.01f;
 			fish_y += 0.03;
 			fish_theta_y-=0.7;
+			
+			std::cout << "phi = " << fish_phi_mov << std::endl;
+			std::cout << "x = " << fish_x << std::endl;
+			std::cout << "z = " << fish_z << std::endl;
+			std::cout << "state = " << fish_state << std::endl;
+			
 			//cabeza
 			if (fish_y <= 16.0f) {
 				if (fish_angle_head_y <= -45.0f) { fish_angle_head_y += 0.0f; }
@@ -443,7 +449,7 @@ void animate(void)
 
 
 
-			std::cout << "ANGLE HEAD GOOOOO: " << fish_angle_head_y << std::endl;
+			//std::cout << "ANGLE HEAD GOOOOO: " << fish_angle_head_y << std::endl;
 			
 				
 
@@ -654,7 +660,16 @@ void animate(void)
 			fish_angle_head_y += 0.2;
 
 			if (fish_y <= (0.0f-fish_pos_ini_y)) {
-				fish_state = 6;
+				fish_state = -1;
+				fish_pos_ini_x = fish_pos_ini_x + fish_x;
+				fish_pos_ini_y = fish_pos_ini_y + fish_y;
+				fish_pos_ini_z = fish_pos_ini_z + fish_z;
+				
+				fish_x = 0.0f;
+				fish_y = 0.0f;
+				fish_z = 0.0f;
+
+				
 			}
 		}
 		 
@@ -1207,9 +1222,9 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		animacion ^= true;
 
 	//animacion compleja de auto
-	if (key == GLFW_KEY_INSERT && action == GLFW_PRESS)
+	if (key == GLFW_KEY_F2 && action == GLFW_PRESS)
 		activate_car_animation ^= true;// compuerta para cambiar el estado
-	if (key == GLFW_KEY_INSERT && action == GLFW_PRESS && car_state == -1) {
+	if (key == GLFW_KEY_F2 && action == GLFW_PRESS && car_state == -1) {
 		car_pos_ini_x = 200.0f;
 		car_pos_ini_z = -260.0f;
 		car_state = 0;
@@ -1218,6 +1233,33 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 	// animacion compleja del Pez
 	if (key == GLFW_KEY_F1 && action == GLFW_PRESS)
 		activate_fish_animation ^= true;// compuerta para cambiar el estado
+	if (key == GLFW_KEY_F1 && action == GLFW_PRESS && fish_state == -1) {
+		activate_fish_animation = false;
+		fish_pos_ini_x = 290.0f;
+		fish_pos_ini_y = 1.5f;
+		fish_pos_ini_z = 150.0f;
+		fish_state = 0;
+
+		fish_theta_x = 0.0f;
+		fish_theta_y = -90.0f;
+		fish_theta_z = 0.0f;
+
+		aumento = 30.0f;
+		decremento = 0.0f;
+
+		fish_angle_head_x = 0.0f;
+		fish_angle_head_y = 0.0f;
+		fish_angle_head_z = 0.0f;
+		fish_angle_bot_x = 0.0f;
+		fish_angle_bot_y = 0.0f;
+		fish_angle_bot_z = 0.0f;
+		fish_angle_tail_x = 0.0f;
+		fish_angle_tail_y = 0.0f;
+		fish_angle_tail_z = 0.0f;
+		fish_phi_mov = 0.0f;
+
+	}
+		
 
 
 	//To play KeyFrame animation 
