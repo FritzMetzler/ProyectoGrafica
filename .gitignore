@@ -2,6 +2,16 @@ ConfiguracionFinal.pdf
 Animacion.docx
 Texturizado_lab.pdf
 Config02.pdf
+<<<<<<< HEAD
+Debug/*
+=======
 Debug/
 *.icph
 .vs/Project/v16/ipch/AutoPCH/74a8e6fc9b950b89/FINAL.ipch
+>>>>>>> f7ca2f8448a6427a9561a1af3be1cfad2cc64459
+.vs/Project/v16/Browse.VC.db-wal
+.vs/Project/v16/.suo
+.vs/Project/v16/Browse.VC.db
+.vs/Project/v16/.suo
+.vs/Project/v16/Browse.VC.db-shm
+.vs/Project/v16/Browse.VC.opendb
