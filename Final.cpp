@@ -765,10 +765,8 @@ int main()
 	Model suelo("resources/objects/suelo/suelo.obj");
 	Model car_1("resources/objects/coche_azul/Muscle_Car_Pack_2.obj");
 	Model car_2("resources/objects/coche_rojo/Muscle_Car_Pack_1.obj");
-<<<<<<< HEAD
 	Model car_3("resources/objects/coche_verde/Muscle_Car_Pack_3.obj");
 	Model dino_1("resources/objects/Dilophosaurus/dilophosaurus.obj");
-=======
 
 	Model fishComplete("resources/objects/fish/fish_complete/pez.obj");
 
@@ -781,7 +779,6 @@ int main()
 
 
 	//Model car_3("resources/objects/coche_verde/Muscle_Car_Pack_3.obj");
->>>>>>> main
 	//Model car_1("resources/objects/coche_negro/");
 
 	//Model piso("resources/objects/piso/piso.obj");
@@ -859,23 +856,15 @@ int main()
 		staticShader.setVec3("pointLight[0].specular", glm::vec3(0.0f, 0.0f, 0.0f));
 		staticShader.setFloat("pointLight[0].constant", 0.008f);
 		staticShader.setFloat("pointLight[0].linear", 0.009f);
-		staticShader.setFloat("pointLight[0].quadratic", 0.00032f);
+		staticShader.setFloat("pointLight[0].quadratic", 0.32f);
 		
-		staticShader.setVec3("pointLight[1].position", glm::vec3(-80.0f, 0.0f, 0.0f));
-		staticShader.setVec3("pointLight[1].ambient", glm::vec3(1.0f, 0.0f, 0.0f));
-		staticShader.setVec3("pointLight[1].diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
+		staticShader.setVec3("pointLight[1].position", lightPosition);
+		staticShader.setVec3("pointLight[1].ambient", glm::vec3(0.0f, 0.0f, 0.0f));
+		staticShader.setVec3("pointLight[1].diffuse", glm::vec3(1.0f, 1.0f, 1.0f));
 		staticShader.setVec3("pointLight[1].specular", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setFloat("pointLight[1].constant", 0.5f);
+		staticShader.setFloat("pointLight[1].constant", 1.0f);
 		staticShader.setFloat("pointLight[1].linear", 0.009f);
-		staticShader.setFloat("pointLight[1].quadratic", 0.032f);
-		
-		staticShader.setVec3("pointLight[2].position", lightPosition);
-		staticShader.setVec3("pointLight[2].ambient", glm::vec3(1.0f, 0.0f, 0.0f));
-		staticShader.setVec3("pointLight[2].diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setVec3("pointLight[2].specular", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setFloat("pointLight[2].constant", 1.0f);
-		staticShader.setFloat("pointLight[2].linear", 0.009f);
-		staticShader.setFloat("pointLight[2].quadratic", 0.032f);
+		staticShader.setFloat("pointLight[1].quadratic", 0.32f);
 
 
 		staticShader.setFloat("material_shininess", 32.0f);
@@ -931,7 +920,6 @@ int main()
 		staticShader.setMat4("model", model);
 		car_2.Draw(staticShader);
 
-<<<<<<< HEAD
 		// Dino 
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -2.75f, 0.0f));
@@ -942,7 +930,6 @@ int main()
 		/*
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 0.0f, -10.0f));
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-=======
 		//________________________________________________________________________________________________________
 		//________________________________________ PEZ ___________________________________________________________
 		//________________________________________________________________________________________________________

@@ -2,21 +2,6 @@
 C:\ProyectoGrafica\include\shader_m.h(44,40): warning C4101: 'e': variable local sin referencia
 C:\ProyectoGrafica\include\modelAnim.h(104,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 C:\ProyectoGrafica\include\modelAnim.h(520,24): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-<<<<<<< HEAD
-C:\ProyectoGrafica\Final.cpp(157,19): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\ProyectoGrafica\Final.cpp(672,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(673,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(677,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(678,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(680,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(681,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(689,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-glfw3.lib(input.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(input.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(monitor.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(window.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_joystick.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_joystick.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_window.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-=======
 C:\ProyectoGrafica\Final.cpp(79,14): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
 C:\ProyectoGrafica\Final.cpp(307,22): warning C4305: '+=': truncamiento de 'double' a 'float'
 C:\ProyectoGrafica\Final.cpp(329,28): warning C4305: '=': truncamiento de 'double' a 'float'
@@ -58,14 +43,13 @@ C:\ProyectoGrafica\Final.cpp(655,23): warning C4305: '-=': truncamiento de 'doub
 C:\ProyectoGrafica\Final.cpp(658,27): warning C4305: '-=': truncamiento de 'double' a 'float'
 C:\ProyectoGrafica\Final.cpp(659,28): warning C4305: '-=': truncamiento de 'double' a 'float'
 C:\ProyectoGrafica\Final.cpp(660,28): warning C4305: '+=': truncamiento de 'double' a 'float'
-C:\ProyectoGrafica\Final.cpp(1311,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(1312,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(1316,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(1317,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(1319,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(1320,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-C:\ProyectoGrafica\Final.cpp(1328,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-  glad.c
+C:\ProyectoGrafica\Final.cpp(1316,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1317,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1321,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1322,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1324,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1325,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1333,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
   LINK : no se encontró C:\ProyectoGrafica\Debug\Project.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
 glfw3.lib(context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(context.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(init.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
@@ -82,5 +66,4 @@ glfw3.lib(win32_window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' co
 glfw3.lib(wgl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(wgl_context.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(egl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(egl_context.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(osmesa_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(osmesa_context.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
->>>>>>> main
   Project.vcxproj -> C:\ProyectoGrafica\Debug\Project.exe
