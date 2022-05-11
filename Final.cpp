@@ -3,7 +3,7 @@
 * Integrantes:
 * -Aguilar González Oscar
 * -Michel Baez
-* -Alejandro
+* -Alejandro Hernández Rodríguez
 
 */
 
@@ -595,7 +595,7 @@ void animate(void)
 			}
 			
 			if (fish_phi_mov >= -1.5707f && fish_phi_mov <= 0.0f) {
-				fish_theta_y--;
+				fish_theta_y-=0.3;
 				fish_theta_z -= 0.2;
 				fish_angle_bot_y -= 0.2;
 				fish_angle_tail_y -= 0.2;
@@ -603,9 +603,20 @@ void animate(void)
 			}
 			//else {}
 			if (fish_phi_mov >= 0.0f && fish_phi_mov <= 1.5707f) {
+				fish_theta_y -= 0.3;
+				fish_theta_z += 0.3;
 				fish_angle_bot_y += 0.2;
 				fish_angle_tail_y += 0.2;
 				fish_angle_head_y -= 0.2;
+			}
+
+			if (fish_phi_mov >= 1.5707f && fish_phi_mov <= 3.14159265f) {
+				fish_theta_y -= 0.3;
+				fish_theta_z += 0.6;
+				fish_theta_x -= 0.6;
+				fish_angle_bot_y -= 0.1;
+				fish_angle_tail_y -= 0.1;
+				fish_angle_head_y += 0.2;
 			}
 			//else {}
 
@@ -634,6 +645,14 @@ void animate(void)
 			decremento += 0.009;
 			fish_y += 0.2;
 			fish_z -= 1.0f;
+			
+			fish_theta_y -= 0.3;
+			fish_theta_z += 1;
+			fish_theta_x -= 1;
+			fish_angle_bot_y -= 0.3;
+			fish_angle_tail_y -= 0.3;
+			fish_angle_head_y += 0.2;
+
 			if (fish_y <= (0.0f-fish_pos_ini_y)) {
 				fish_state = 6;
 			}
