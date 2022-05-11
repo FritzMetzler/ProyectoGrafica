@@ -1,56 +1,70 @@
 ﻿  Final.cpp
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\include\shader_m.h(44,40): warning C4101: 'e': variable local sin referencia
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\include\modelAnim.h(104,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\include\modelAnim.h(520,24): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(79,14): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(307,22): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(329,28): warning C4305: '=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(354,16): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(414,18): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(415,21): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(428,32): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(507,49): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(509,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(511,23): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(512,23): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(528,28): warning C4305: '=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(563,24): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(586,22): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(597,22): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(598,28): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(599,29): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(600,29): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(604,22): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(605,24): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(606,28): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(607,29): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(608,29): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(612,24): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(613,24): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(614,28): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(615,29): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(616,29): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(620,24): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(621,24): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(622,24): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(623,28): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(624,29): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(625,29): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(632,18): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(651,23): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(652,17): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(655,23): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(658,27): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(659,28): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(660,28): warning C4305: '+=': truncamiento de 'double' a 'float'
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(1311,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(1312,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(1316,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(1317,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(1319,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(1320,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\VisualStudio\PRacticas\ProjectGrafica\Project\Project\Final.cpp(1328,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-glfw3.lib(input.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(input.obj)' o en 'D:\VisualStudio\PRacticas\ProjectGrafica\Project\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(monitor.obj)' o en 'D:\VisualStudio\PRacticas\ProjectGrafica\Project\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_window.obj)' o en 'D:\VisualStudio\PRacticas\ProjectGrafica\Project\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-  Project.vcxproj -> D:\VisualStudio\PRacticas\ProjectGrafica\Project\Debug\Project.exe
+C:\ProyectoGrafica\include\shader_m.h(44,40): warning C4101: 'e': variable local sin referencia
+C:\ProyectoGrafica\include\modelAnim.h(104,44): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\include\modelAnim.h(520,24): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(79,14): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(307,22): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(329,28): warning C4305: '=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(354,16): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(414,18): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(415,21): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(428,32): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(507,49): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(509,39): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(511,23): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(512,23): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(528,28): warning C4305: '=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(563,24): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(586,22): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(597,22): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(598,28): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(599,29): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(600,29): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(604,22): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(605,24): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(606,28): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(607,29): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(608,29): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(612,24): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(613,24): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(614,28): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(615,29): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(616,29): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(620,24): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(621,24): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(622,24): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(623,28): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(624,29): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(625,29): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(632,18): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(651,23): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(652,17): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(655,23): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(658,27): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(659,28): warning C4305: '-=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(660,28): warning C4305: '+=': truncamiento de 'double' a 'float'
+C:\ProyectoGrafica\Final.cpp(1311,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1312,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1316,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1317,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1319,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1320,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\ProyectoGrafica\Final.cpp(1328,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
+  glad.c
+  LINK : no se encontró C:\ProyectoGrafica\Debug\Project.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+glfw3.lib(context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(context.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(init.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(input.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(input.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(monitor.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(vulkan.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(vulkan.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(window.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_init.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_joystick.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_joystick.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_monitor.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_time.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_time.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_thread.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_thread.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(win32_window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_window.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(wgl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(wgl_context.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(egl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(egl_context.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+glfw3.lib(osmesa_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(osmesa_context.obj)' o en 'C:\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  Project.vcxproj -> C:\ProyectoGrafica\Debug\Project.exe
