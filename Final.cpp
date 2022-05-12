@@ -1,16 +1,14 @@
 ﻿/*
-* PROYECTO FINAL
-* Integrantes:
-* -Aguilar González Oscar
-* -Michel Baez
-* -Alejandro Hernández Rodríguez
-
+	* PROYECTO FINAL - LAB. COMPUTACIÓN GRAFICA E INTERACCIÓN HUMANO-COMPUTADORA
+	* Integrantes:
+	* - Aguilar González Oscar
+	* - Báez Cadena Diestefano Michel
+	* - Hernández Rodríguez Alejandro
+	* SEMESTRE 2022-2
 */
-
 
 //--------------import Libraries-------------------
 #include <Windows.h>
-
 #include <glad/glad.h>
 #include <glfw3.h>	//main
 #include <stdlib.h>		
@@ -19,13 +17,11 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <time.h>
 
-
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>	//Texture
 
 #define SDL_MAIN_HANDLED
 #include <SDL/SDL.h>
-
 #include <shader_m.h>
 #include <camera.h>
 #include <modelAnim.h>
@@ -33,10 +29,7 @@
 #include <Skybox.h>
 #include <iostream>
 
-
-
 /*#pragma comment(lib, "winmm.lib")*/
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -65,27 +58,15 @@ double	deltaTime = 0.0f,
 		lastFrame = 0.0f;
 
 //Lighting
-//glm::vec3 lightPosition(0.0f, 4.0f, -10.0f);
 glm::vec3 lightPosition(0.0f, 4.0f, -5.0f);
 glm::vec3 lightDirection(-1.0f, 0.0f, 0.0f);
 
 // posiciones
-//float x = 0.0f;
-//float y = 0.0f;
-// 
-//variables importantes
 float	PI = 3.1416f,
 		thetatest = -90.f,
 		GRAVITY=9.1;
-float	movAuto_x = 0.0f,
-		movAuto_z = 0.0f,
-		orienta = 0.0f;
-bool	animacion = false,
-		activate_car_animation=false,
-		recorrido1 = true,
-		recorrido2 = false,
-		recorrido3 = false,
-		recorrido4 = false;
+
+bool	activate_car_animation=false;
 
 //variables del coche
 float	car_pos_ini_x = 200.0f,
@@ -102,23 +83,20 @@ int		car_state=0;
 		//para mover todo el pez
 		//para posicion relativa
 float	fish_pos_ini_x = 290.0f,
-fish_pos_ini_y = 1.5f,
-fish_pos_ini_z = 150.0f,
+		fish_pos_ini_y = 1.5f,
+		fish_pos_ini_z = 150.0f,
 //avance respecto de la posicion relativa
-fish_x = 0.0f,
-fish_z = 0.0f,
-fish_y = 0.0f,
+		fish_x = 0.0f,
+		fish_z = 0.0f,
+		fish_y = 0.0f,
 //estas son para rotarlo en cuanto a los ejes
-fish_theta_x = 0.0f,
-fish_theta_y = -90.0f,
-fish_theta_z = 0.0f,
+		fish_theta_x = 0.0f,
+		fish_theta_y = -90.0f,
+		fish_theta_z = 0.0f,
 //estas son para senos y cosenos
-fish_phi_mov = 0.0f,
-aumento=30.0f,
-decremento = 0.0f;
-
-
-
+		fish_phi_mov = 0.0f,
+		aumento=30.0f,
+		decremento = 0.0f;
 
 //para mover partes del pez en rotaciones
 float	fish_angle_head_x = 0.0f,
@@ -138,18 +116,55 @@ int		fish_state = 0,
 //Keyframes (Manipulación y dibujo)
 float	posX = 0.0f,
 		posY = 0.0f,
-		posZ = 0.0f,
-		rotRodIzq = 0.0f,
-		giroMonito = 0.0f;
+		posZ = 0.0f;
+
 float	incX = 0.0f,
 		incY = 0.0f,
 		incZ = 0.0f,
 		rotInc = 0.0f,
 		giroMonitoInc = 0.0f;
 
-float myVariable = 0.0f;
+// Keyframes para el dino
+float	dino_posX = -200.0f,
+		dino_posY = 10.0f,
+		dino_posZ = -140.0f,
+		dino_rotPiernaIzq = 0.0f,
+		dino_rotPiernaDer = 0.0f,
+		dino_giro = 0.0f,
+		dino_rotBoca = 0.0f,
+		dino_rotCola = 0.0f;
 
-#define MAX_FRAMES 9
+float	dino_incX = 0.0f,
+		dino_incY = 0.0f,
+		dino_incZ = 0.0f,
+		dino_rotPiernaIzqInc = 0.0f,
+		dino_rotPiernaDerInc = 0.0f,
+		dino_anguloIzq = 0.0f,
+		dino_anguloDer = 0.0f,
+		dino_anguloCola = 0.0f,
+		dino_anguloBoca = 0.0f,
+		dino_giroInc = 0.0f,
+		dino_rotBocaInc = 0.0f,
+		dino_rotColaInc = 0.0f;
+
+//variables helicoptero
+float	giro_helices = 0.0f,
+		rot_hel = -90.0f,
+		helicoptero_x = 0.0f,
+		helicoptero_y = 0.0f,
+		helicoptero_z = 0.0f,
+		heliceGrande_x = -30.0f,
+		heliceGrande_y = 0.0f,
+		heliceGrande_z = 0.0f,
+		heliceChica_x = 46.0f,
+		heliceChica_y = 0.0f,
+		heliceChica_z = 0.0f,
+		hel_direccion = -90.0f;
+
+int		hel_state = 0;
+bool	activate_hel_animation = false;
+
+#define MAX_FRAMES 15
 int i_max_steps = 60;
 int i_curr_steps = 0;
 typedef struct _frame
@@ -158,8 +173,17 @@ typedef struct _frame
 	float posX;		//Variable para PosicionX
 	float posY;		//Variable para PosicionY
 	float posZ;		//Variable para PosicionZ
+	float dino_posX;		//Variable para PosicionX
+	float dino_posY;		//Variable para PosicionY
+	float dino_posZ;
 	float rotRodIzq;
 	float giroMonito;
+	float dino_giro;
+	float dino_rotPiernaDer;
+	float dino_rotPiernaIzq;
+	float dino_rotCola;
+	float dino_rotBoca;
+	int n;
 
 }FRAME;
 
@@ -177,40 +201,32 @@ void saveFrame(void)
 	KeyFrame[FrameIndex].posY = posY;
 	KeyFrame[FrameIndex].posZ = posZ;
 
-	KeyFrame[FrameIndex].rotRodIzq = rotRodIzq;
-	KeyFrame[FrameIndex].giroMonito = giroMonito;
-
 	FrameIndex++;
 }
 
 void resetElements(void)
 {
-	posX = KeyFrame[0].posX;
-	posY = KeyFrame[0].posY;
-	posZ = KeyFrame[0].posZ;
-
-	rotRodIzq = KeyFrame[0].rotRodIzq;
-	giroMonito = KeyFrame[0].giroMonito;
+	dino_posX = KeyFrame[0].dino_posX;
+	dino_posY = KeyFrame[0].dino_posY;
+	dino_posZ = KeyFrame[0].dino_posZ;
+	dino_giro = KeyFrame[0].dino_giro;
 }
+
 
 void interpolation(void)
 {
-	incX = (KeyFrame[playIndex + 1].posX - KeyFrame[playIndex].posX) / i_max_steps;
-	incY = (KeyFrame[playIndex + 1].posY - KeyFrame[playIndex].posY) / i_max_steps;
-	incZ = (KeyFrame[playIndex + 1].posZ - KeyFrame[playIndex].posZ) / i_max_steps;
-
-	rotInc = (KeyFrame[playIndex + 1].rotRodIzq - KeyFrame[playIndex].rotRodIzq) / i_max_steps;
-	giroMonitoInc = (KeyFrame[playIndex + 1].giroMonito - KeyFrame[playIndex].giroMonito) / i_max_steps;
-
+	dino_incX = (KeyFrame[playIndex + 1].dino_posX - KeyFrame[playIndex].dino_posX) / i_max_steps;
+	dino_incY = (KeyFrame[playIndex + 1].dino_posY - KeyFrame[playIndex].dino_posY) / i_max_steps;
+	dino_incZ = (KeyFrame[playIndex + 1].dino_posZ - KeyFrame[playIndex].dino_posZ) / i_max_steps;
+	dino_rotPiernaDerInc = 2 * KeyFrame[playIndex + 1].n * PI / i_max_steps;
+	dino_rotPiernaIzqInc = 2 * KeyFrame[playIndex + 1].n * PI / i_max_steps;
+	dino_rotBocaInc = 2 * (KeyFrame[playIndex + 1].n / 2) * PI / i_max_steps;
+	dino_rotColaInc = 2 * (KeyFrame[playIndex + 1].n / 2) * PI / i_max_steps;
+	dino_giroInc = (KeyFrame[playIndex + 1].dino_giro - KeyFrame[playIndex].dino_giro) / i_max_steps;
 }
 
 void animate(void)
 {
-	//lightPosition.x = 100.0f * cos(myVariable);
-	//lightPosition.z = 100.0f * sin(myVariable);
-
-	//myVariable += 0.1;
-
 	if (play)
 	{
 		if (i_curr_steps >= i_max_steps) //end of animation between frames?
@@ -232,24 +248,32 @@ void animate(void)
 		}
 		else
 		{
-			//Draw animation
-			posX += incX;
-			posY += incY;
-			posZ += incZ;
+			/************ ANIMACION DEL DINOSAURIO ****************/
+			dino_posX += dino_incX;
+			dino_posY += dino_incY;
+			dino_posZ += dino_incZ;
 
-			rotRodIzq += rotInc;
-			giroMonito += giroMonitoInc;
+			dino_anguloDer += dino_rotPiernaDerInc;
+			dino_anguloIzq -= dino_rotPiernaIzqInc;
+
+			dino_rotPiernaDer = 30 * sin(dino_anguloDer);
+			dino_rotPiernaIzq = 30 * sin(dino_anguloIzq);
+
+			dino_anguloBoca += dino_rotBocaInc;
+
+			dino_anguloCola += dino_rotColaInc;
+
+			dino_rotBoca = 15 * sin(dino_anguloBoca);
+
+			dino_rotCola = 30 * sin(dino_anguloCola);
+
+			dino_giro += dino_giroInc;
 
 			i_curr_steps++;
 		}
 	}
 
-	//Vehículo
-	if (animacion)
-	{
-		movAuto_z += 3.0f;
-	}
-	
+	/************* ANIMACION VEHICULO ************/
 	if (activate_car_animation) {
 		//echar reversa
 		if (car_state == 0) {
@@ -301,7 +325,6 @@ void animate(void)
 
 		//Elipse 1
 		if (car_state == 3) {
-		/**/
 			car_x = (200.0f * cos(car_theta1))-200.0f;
 			car_z = 70.0f * sin(car_theta1);
 			car_theta1 += 0.01;
@@ -403,7 +426,7 @@ void animate(void)
 
 
 	}
-
+/******************* ANIMACION PESCADO ********************/
 	if (activate_fish_animation) {
 
 		if (fish_state == 0) {
@@ -447,14 +470,6 @@ void animate(void)
 
 			}
 
-
-
-			//std::cout << "ANGLE HEAD GOOOOO: " << fish_angle_head_y << std::endl;
-			
-				
-
-			//std::cout << "X: " << fish_x << "Z: " << fish_z << std::endl;
-			//std::cout << fish_phi_mov << std::endl;
 			if (fish_phi_mov>=6.28f) {
 				fish_state = 1;
 				fish_pos_ini_x = fish_pos_ini_x + fish_x;
@@ -478,8 +493,6 @@ void animate(void)
 			
 			fish_theta_y++;
 			
-			//std::cout << "PTX: "<< fish_theta_x << "PTY: "<< fish_theta_y << "PTZ: "<< fish_theta_z << std::endl;
-
 			std::cout << "phi: " << fish_phi_mov<< std::endl;
 			if (fish_phi_mov <= -3.1416) {
 				//fish_state = -1;
@@ -496,14 +509,10 @@ void animate(void)
 				//preparar angulo para siguente estado
 				fish_phi_mov = -3.141592f; //TODO preparar para salir volando
 			}
-			
-			
-
 		}
 
 		if (fish_state == 2) {
 			//TODO arreglar lo de la posisicion y agregar rotaciones de los ejes al pez
-			//
 			fish_z = (10.0f * sin(fish_phi_mov - 0.2458f)-2.43332); //rotacion
 			fish_y = ((13.0f * sin(-fish_phi_mov)));
 			fish_x = (8.0 * cos(-fish_phi_mov) +8.0f);
@@ -522,40 +531,11 @@ void animate(void)
 				fish_x = 0.0f;
 				fish_y = 0.0f;
 				fish_z = 0.0f;
-				//preparar angulo para siguente estado
-				//fish_phi_mov = -3.14159265f;
-				//fish_phi_mov = 4.71238898f;
 				fish_phi_mov = 1.570796;
 			}
 
 		}
-		//implementar salto con gravedad
-		/*
-		if (fish_state == 3) {
-			fish_z = (15.0f * sin(fish_phi_mov)-15);
-			fish_x = (15.0f * cos(fish_phi_mov));
-			std::cout << " x: " << fish_x << " y: " << fish_y << " z: " << fish_z << std::endl;
 		
-			fish_phi_mov -= 0.01;
-			if (fish_phi_mov <= 0.0f) {
-				fish_state = 4;
-				std::cout << " x: " << fish_x << " y: " << fish_y << " z: " << fish_z << std::endl;
-				fish_pos_ini_x = fish_pos_ini_x + fish_x;
-				fish_pos_ini_y = fish_pos_ini_y + fish_y;
-				fish_pos_ini_z = fish_pos_ini_z + fish_z;
-				std::cout << " px: " << fish_pos_ini_x << " py: " << fish_pos_ini_y << " pz: " << fish_pos_ini_z << std::endl;
-				fish_x = 0.0f;
-				fish_y = 0.0f;
-				fish_z = 0.0f;
-				fish_phi_mov = 1.570796;
-			
-			}
-
-
-		}
-		*/
-
-
 		if (fish_state == 3) {
 			fish_z = (15.0f * sin(fish_phi_mov) - 15);
 			fish_x = (15.0f * cos(fish_phi_mov));
@@ -563,7 +543,6 @@ void animate(void)
 			fish_phi_mov -= 0.01;
 			fish_theta_y+=0.7f;
 			
-
 			if (fish_phi_mov <= 0.0f) {
 				fish_state = 4;
 				std::cout << " x: " << fish_x << " y: " << fish_y << " z: " << fish_z << std::endl;
@@ -575,20 +554,13 @@ void animate(void)
 				fish_y = 0.0f;
 				fish_z = 0.0f;
 				fish_phi_mov = -3.14159265f;
-
 			}
-
 		}
 
 		if (fish_state == 4) {
 			fish_z = (60.0f * sin(fish_phi_mov));
 			fish_x = (30.0f * cos(fish_phi_mov)+30.0f);
 			fish_phi_mov+=0.01;
-			
-			//variables implementar
-			//fish_angle_bot_y += 0.2;
-			//fish_angle_tail_y += 0.2;
-			//fish_angle_head_y -= 0.2;
 			
 			//condiciones cada cuarta parte de la elipse
 			if (fish_phi_mov >= -3.14159265f && fish_phi_mov <= -1.5707f) {
@@ -607,7 +579,7 @@ void animate(void)
 				fish_angle_tail_y -= 0.2;
 				fish_angle_head_y += 0.2;
 			}
-			//else {}
+
 			if (fish_phi_mov >= 0.0f && fish_phi_mov <= 1.5707f) {
 				fish_theta_y -= 0.3;
 				fish_theta_z += 0.3;
@@ -624,11 +596,9 @@ void animate(void)
 				fish_angle_tail_y -= 0.1;
 				fish_angle_head_y += 0.2;
 			}
-			//else {}
 
 			std::cout << " x: " << fish_x << " y: " << fish_y << " z: " << fish_z << std::endl;
 			if (fish_phi_mov>= 1.5707f) {
-				//fish_state = 5;
 				fish_y += 0.2; //altura maxima debe ser 33
 				if (fish_phi_mov >= 3.1415f) {
 					fish_state = 5;
@@ -641,14 +611,12 @@ void animate(void)
 					fish_y = 0.0f;
 					fish_z = 0.0f;
 				}
-				
-			}
-					
+			}	
 		}
 
 		if (fish_state==5) {
 			fish_y = fish_y - decremento;
-			decremento += 0.009;
+			decremento += 0.005;
 			fish_y += 0.2;
 			fish_z -= 1.0f;
 			
@@ -664,18 +632,106 @@ void animate(void)
 				fish_pos_ini_x = fish_pos_ini_x + fish_x;
 				fish_pos_ini_y = fish_pos_ini_y + fish_y;
 				fish_pos_ini_z = fish_pos_ini_z + fish_z;
-				
 				fish_x = 0.0f;
 				fish_y = 0.0f;
 				fish_z = 0.0f;
-
-				
 			}
 		}
-		 
-		//implemetar animacion del pez fuera del agua
+	}
 
+	/***************** ANIMACION HELICOPTERO *****************/
+	if (activate_hel_animation) {
+		if (hel_state == 0) {
+			giro_helices += 8.0f;
+			helicoptero_y += 3.0f;
+			heliceGrande_y += 3.0f;
+			heliceChica_y += 3.0f;
 
+			if (helicoptero_y >= 500.0f) {
+				hel_state = 1;
+			}
+		}
+
+		if (hel_state == 1) {
+			giro_helices += 8.0f;
+			helicoptero_x -= 4.0f;
+			heliceGrande_x -= 4.0f;
+			heliceChica_x -= 4.0f;
+
+			if (helicoptero_x <= -800.0f) {
+				hel_direccion += 3.0f;
+				if (hel_direccion == 0.0f) {
+					hel_direccion += 0.0f;
+					helicoptero_x = -800.0f;
+					heliceGrande_x = -800.0f;
+					heliceChica_x = -796.5f;
+					helicoptero_z = -260.0f;
+					heliceGrande_z = -230.0f;
+					heliceChica_z = -306.0f;
+					hel_state = 2;
+				}
+
+			}
+		}
+
+		if (hel_state == 2) {
+			giro_helices += 8.0f;
+			rot_hel = 0.0f;
+
+			helicoptero_z += 4.0f;
+			heliceGrande_z += 4.0f;
+			heliceChica_z += 4.0f;
+
+			if (helicoptero_z >= 540.0f) {
+				hel_direccion += 3.0f;
+				if (hel_direccion == 135.0f) {
+					helicoptero_x = -800.0f;
+					heliceGrande_x = -780.2737f;
+					heliceChica_x = -834.552;// -869.957f;
+					helicoptero_z = 540.0f;
+					heliceGrande_z = 520.2737f;
+					heliceChica_z = 570.569f;
+					hel_state = 3;
+				}
+			}
+		}
+
+		if (hel_state == 3) {
+			giro_helices += 8.0f;
+			rot_hel = 135.0f;
+
+			helicoptero_z -= 4.0f;
+			heliceGrande_z -= 4.0f;
+			heliceChica_z -= 4.0f;
+			helicoptero_x += 4.0f;
+			heliceGrande_x += 4.0f;
+			heliceChica_x += 4.0f;
+
+			if (helicoptero_x >= 0.0f) {
+				hel_direccion += 3.0f;
+				if (hel_direccion == 270.0f) {
+
+					helicoptero_x = 0.0f,
+						helicoptero_z = -260.0f,
+						heliceGrande_x = -30.0f,
+						heliceGrande_z = -260.0f,
+						heliceChica_x = 46.0f,
+						heliceChica_z = -256.5f,
+						hel_state = 4;
+				}
+			}
+		}
+		if (hel_state == 4) {
+			giro_helices += 8.0f;
+			helicoptero_y -= 3.0f;
+			heliceGrande_y -= 3.0f;
+			heliceChica_y -= 3.0f;
+
+			if (helicoptero_y <= 0.0f) {
+				hel_state = -1;
+				giro_helices = 0.0f;
+			}
+		}
 	}
 }
 
@@ -687,23 +743,14 @@ void getResolution()
 	SCR_HEIGHT = (mode->height) - 80;
 }
 
-
 int main()
 {
-	// glfw: initialize and configure
-	// ------------------------------
 	glfwInit();
-	/*glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);*/
-
+	
 #ifdef __APPLE__
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-	// glfw window creation
-	// --------------------
-	// --------------------
 	monitors = glfwGetPrimaryMonitor();
 	getResolution();
 
@@ -744,12 +791,12 @@ int main()
 
 	vector<std::string> faces
 	{
-		"resources/skybox/right.jpg",
-		"resources/skybox/left.jpg",
-		"resources/skybox/top.jpg",
-		"resources/skybox/bottom.jpg",
-		"resources/skybox/front.jpg",
-		"resources/skybox/back.jpg"
+		"resources/skybox/right.bmp",
+		"resources/skybox/left.bmp",
+		"resources/skybox/top.bmp",
+		"resources/skybox/bottom.bmp",
+		"resources/skybox/front.bmp",
+		"resources/skybox/back.bmp"
 	};
 
 	Skybox skybox = Skybox(faces);
@@ -759,67 +806,154 @@ int main()
 	skyboxShader.use();
 	skyboxShader.setInt("skybox", 0);
 
-	// load models
-	// -----------
-
+	// CARGA DE MODELOS
+	/******** MODELO SUELO ***********/
 	Model suelo("resources/objects/suelo/suelo.obj");
+
+	/******** MODELOS AUTOS ***********/
 	Model car_1("resources/objects/coche_azul/Muscle_Car_Pack_2.obj");
 	Model car_2("resources/objects/coche_rojo/Muscle_Car_Pack_1.obj");
-	Model car_3("resources/objects/coche_verde/Muscle_Car_Pack_3.obj");
-	Model dino_1("resources/objects/Dilophosaurus/dilophosaurus.obj");
 
+	/******** MODELO PESCADO ***********/
 	Model fishComplete("resources/objects/fish/fish_complete/pez.obj");
-
 	Model fish_head("resources/objects/fish/fish_head/fish_head.obj");
 	Model fish_body_1("resources/objects/fish/fish_body1/fish_body1.obj");
 	Model fish_body_2("resources/objects/fish/fish_body2/fish_body2.obj");
 	Model fish_tail("resources/objects/fish/fish_body3/fish_body3.obj");
-	//Model helice("resources/objects/helice/Helice.obj");
-	//Model helice_tras("resources/objects/helice/helice_tras.obj");
 
+	/******** MODELOS CONSTRUCCIONES ***********/
+	Model edificio1("resources/objects/edificio1/build3.obj");
+	Model edificio2("resources/objects/edificio2/city3.obj");
+	Model pilar("resources/objects/pilar/pilar.obj");
+	Model pared("resources/objects/pared/pared.obj");
 
-	//Model car_3("resources/objects/coche_verde/Muscle_Car_Pack_3.obj");
-	//Model car_1("resources/objects/coche_negro/");
-
-	//Model piso("resources/objects/piso/piso.obj");
-	/*
-	Model botaDer("resources/objects/Personaje/bota.obj");
-	Model piernaDer("resources/objects/Personaje/piernader.obj");
-	Model piernaIzq("resources/objects/Personaje/piernader.obj");
-	Model torso("resources/objects/Personaje/torso.obj");
-	Model brazoDer("resources/objects/Personaje/brazoder.obj");
-	Model brazoIzq("resources/objects/Personaje/brazoizq.obj");
-	Model cabeza("resources/objects/Personaje/cabeza.obj");
-	Model carro("resources/objects/lambo/carroceria.obj");
+	/******** MODELO FUENTE ***********/
+	Model fuente("resources/objects/fuente/fuente.obj");
 	
-	Model casaVieja("resources/objects/casa/OldHouse.obj");
-	//Model cubo("resources/objects/cubo/cube02.obj");
-	Model casaDoll("resources/objects/casa/DollHouse.obj");*/
-	//Model cubito("resources/objects/cubito/cubito.obj");
-	//Model llanta("resources/objects/lambo/Wheel.obj");
-	
+	/******** MODELOS ARBOLES ***********/
+	Model arbol1("resources/objects/arbol1/arbol1.obj");
+	Model arbol2("resources/objects/arbol2/arbol.obj");
+	Model arbusto("resources/objects/arbusto/arbusto1.obj");
 
-	//Model casabrujas("resources/objects/casabrujas/casabrujas.obj");
-	//ModelAnim amy("resources/objects/Amy/amy.dae");
-	//amy.initShaders(animShader.ID);
-	/*ModelAnim animacionPersonaje("resources/objects/Personaje1/PersonajeBrazo.dae");
-	animacionPersonaje.initShaders(animShader.ID);
+	/******** MODELOS PIEDRAS ***********/
+	Model piedra1("resources/objects/piedra/piedra.obj");
+	Model piedra2("resources/objects/piedrita/piedrita.obj");
 
-	ModelAnim ninja("resources/objects/ZombieWalk/ZombieWalk.dae");
-	ninja.initShaders(animShader.ID);
-	*/
+	/******** MODELO CANCHA ***********/
+	Model cancha("resources/objects/cancha/cancha.obj");
+
+	/******** MODELO ALBERCA ***********/
+	Model pool("resources/objects/alberca/picina.obj");
+
+	/******** MODELO DINOSAURIO ***********/
+	Model dino_brazo_izq("resources/objects/dino/brazo_izq/brazo_izq.obj");
+	Model dino_brazo_der("resources/objects/dino/brazo_der/brazo_der.obj");
+	Model dino_cola("resources/objects/dino/cola/cola.obj");
+	Model dino_cuello("resources/objects/dino/cuello/cuello.obj");
+	Model dino_pata_der("resources/objects/dino/pata_der/pata.obj");
+	Model dino_pata_izq("resources/objects/dino/pata_izq/pata_izq.obj");
+	Model dino_torso("resources/objects/dino/torso/torso.obj");
+	Model dino_cabeza_inf("resources/objects/dino/cabeza_inf/cabeza_inf.obj");
+	Model dino_cabeza_sup("resources/objects/dino/cabeza_sup/cabeza_sup.obj");
+
+	/******** MODELO HELICOPTERO ***********/
+	Model helicoptero("resources/objects/helicoptero/helicoptero.obj");
+	Model helice_arriba("resources/objects/helice/helice.obj");
+	Model helice_tras("resources/objects/helice_tras/helice_tras.obj");
+
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
 	{
-		KeyFrame[i].posX = 0;
-		KeyFrame[i].posY = 0;
-		KeyFrame[i].posZ = 0;
-		KeyFrame[i].rotRodIzq = 0;
-		KeyFrame[i].giroMonito = 0;
+		KeyFrame[i].dino_posX = 0;
+		KeyFrame[i].dino_posY = 0;
+		KeyFrame[i].dino_posZ = 0;
+		KeyFrame[i].dino_giro = 0;
 	}
 
-	// draw in wireframe
-	//glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	KeyFrame[0].dino_posX = dino_posX;
+	KeyFrame[0].dino_posY = dino_posY;
+	KeyFrame[0].dino_posZ = dino_posZ;
+	KeyFrame[0].n = 4;
+
+	KeyFrame[1].dino_posX = -200.0f;
+	KeyFrame[1].dino_posY = 10.0f;
+	KeyFrame[1].dino_posZ = -80.0f;
+	KeyFrame[1].dino_giro = 0.0f;
+	KeyFrame[1].n = 4;
+
+	KeyFrame[2].dino_posX = -180.0f;
+	KeyFrame[2].dino_posY = 10.0f;
+	KeyFrame[2].dino_posZ = 0.0f;
+	KeyFrame[2].dino_giro = 90.0f;
+	KeyFrame[2].n = 2;
+
+	KeyFrame[3].dino_posX = 0.0f;
+	KeyFrame[3].dino_posY = 10.0f;
+	KeyFrame[3].dino_posZ = 0.0f;
+	KeyFrame[3].dino_giro = 90.0f;
+	KeyFrame[3].n = 4;
+
+	KeyFrame[4].dino_posX = 50.0f;
+	KeyFrame[4].dino_posY = 10.0f;
+	KeyFrame[4].dino_posZ = 80.0f;
+	KeyFrame[4].dino_giro = 0.0f;
+	KeyFrame[4].n = 2;
+
+	KeyFrame[5].dino_posX = 50.0f;
+	KeyFrame[5].dino_posY = 10.0f;
+	KeyFrame[5].dino_posZ = 160.0f;
+	KeyFrame[5].dino_giro = 0.0f;
+	KeyFrame[5].n = 4;
+
+	KeyFrame[6].dino_posX = 60.0f;
+	KeyFrame[6].dino_posY = 10.0f;
+	KeyFrame[6].dino_posZ = 200.0f;
+	KeyFrame[6].dino_giro = 90.0f;
+	KeyFrame[6].n = 2;
+
+	KeyFrame[7].dino_posX = 120.0f;
+	KeyFrame[7].dino_posY = 10.0f;
+	KeyFrame[7].dino_posZ = 200.0f;
+	KeyFrame[7].dino_giro = 90.0f;
+	KeyFrame[7].n = 4;
+	
+	KeyFrame[8].dino_posX = 150.0f;
+	KeyFrame[8].dino_posY = 10.0f;
+	KeyFrame[8].dino_posZ = 200.0f;
+	KeyFrame[8].dino_giro = 180.0f;
+	KeyFrame[8].n = 2;
+	
+	KeyFrame[9].dino_posX = 150.0f;
+	KeyFrame[9].dino_posY = 10.0f;
+	KeyFrame[9].dino_posZ = 40.0f;
+	KeyFrame[9].dino_giro = 180.0f;
+	KeyFrame[9].n = 4;
+
+	KeyFrame[10].dino_posX = 110.0f;
+	KeyFrame[10].dino_posY = 10.0f;
+	KeyFrame[10].dino_posZ = 0.0f;
+	KeyFrame[10].dino_giro = 270.0f;
+	KeyFrame[10].n = 4;
+
+	KeyFrame[11].dino_posX = -180.0f;
+	KeyFrame[11].dino_posY = 10.0f;
+	KeyFrame[11].dino_posZ = 0.0f;
+	KeyFrame[11].dino_giro = 270.0f;
+	KeyFrame[11].n = 4;
+
+	KeyFrame[12].dino_posX = -200.0f;
+	KeyFrame[12].dino_posY = 10.0f;
+	KeyFrame[12].dino_posZ = -20.0f;
+	KeyFrame[12].dino_giro = 180.0f;
+	KeyFrame[12].n = 2;
+	
+	KeyFrame[13].dino_posX = -200.0f;
+	KeyFrame[13].dino_posY = 10.0f;
+	KeyFrame[13].dino_posZ = -100.0f;
+	KeyFrame[13].dino_giro = 180.0f;
+	KeyFrame[13].n = 4;
+
+	FrameIndex = 14;
 
 	// render loop
 	// -----------
@@ -838,7 +972,7 @@ int main()
 
 		// render
 		// ------
-		glClearColor(0.3f, 0.3f, 0.3f, 0.0f);
+		glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// don't forget to enable shader before setting uniforms
@@ -858,15 +992,14 @@ int main()
 		staticShader.setFloat("pointLight[0].linear", 0.009f);
 		staticShader.setFloat("pointLight[0].quadratic", 0.32f);
 		
-		staticShader.setVec3("pointLight[1].position", lightPosition);
+		staticShader.setVec3("pointLight[1].position", glm::vec3(-80.0f, 0.0f, 0.0f));
 		staticShader.setVec3("pointLight[1].ambient", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setVec3("pointLight[1].diffuse", glm::vec3(1.0f, 1.0f, 1.0f));
+		staticShader.setVec3("pointLight[1].diffuse", glm::vec3(0.0f, 0.0f, 0.0f));
 		staticShader.setVec3("pointLight[1].specular", glm::vec3(0.0f, 0.0f, 0.0f));
-		staticShader.setFloat("pointLight[1].constant", 1.0f);
+		staticShader.setFloat("pointLight[1].constant", 0.5f);
 		staticShader.setFloat("pointLight[1].linear", 0.009f);
-		staticShader.setFloat("pointLight[1].quadratic", 0.32f);
-
-
+		staticShader.setFloat("pointLight[1].quadratic", 0.032f);
+		
 		staticShader.setFloat("material_shininess", 32.0f);
 
 		glm::mat4 model = glm::mat4(1.0f);
@@ -890,53 +1023,212 @@ int main()
 		staticShader.setMat4("view", view);
 		
 		
-		//________________________________________________________________________________________________________
-		//____________________________________ SUELO ________________________________________________________
-		//________________________________________________________________________________________________________
+		/******************* SUELO *******************/
 		model = glm::mat4(1.0f);
 		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
 		model = glm::scale(model, glm::vec3(10.0f));
 		staticShader.setMat4("model", model);
 		suelo.Draw(staticShader);
 
-		//________________________________________________________________________________________________________
-		//____________________________________ ESTATICOS ________________________________________________________
-		//________________________________________________________________________________________________________
+		/******************* CANCHA *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(115.0f, 0.0f, 163.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.7f, 4.0f, 4.0f));
+		staticShader.setMat4("model", model);
+		cancha.Draw(staticShader);
+
+		/******************* EDIFICIO 1 *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(35.0f, -5.0f, -179.0f));
+		model = glm::scale(model, glm::vec3(2.0f,2.0f,1.8f));
+		staticShader.setMat4("model", model);
+		edificio1.Draw(staticShader);
+
+		/******************* EDIFICIO 2 *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(20.0f, 15.0f, 350.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(9.0f, 10.0f, 9.0f));
+		staticShader.setMat4("model", model);
+		edificio2.Draw(staticShader);
+
+		/******************* ALBERCA *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(285.0f, 0.0f, 170.0f));
+		model = glm::scale(model, glm::vec3(14.9f, 2.0f, 11.8f));
+		staticShader.setMat4("model", model);
+		pool.Draw(staticShader);
+
+		/******************* ARBOLES Y VEGETACION *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-320.0f, 0.0f, 190.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
+		staticShader.setMat4("model", model);
+		arbol1.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-330.0f, 0.0f, 190.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(5.0f, 5.0f, 5.0f));
+		staticShader.setMat4("model", model);
+		arbusto.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-330.0f, 0.0f, 180.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
+		staticShader.setMat4("model", model);
+		arbusto.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-355.0f, 2.0f, 265.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(30.0f, 30.0f, 30.0f));
+		staticShader.setMat4("model", model);
+		piedra2.Draw(staticShader);
+		
+		/******************* BARDA DEL PARQUE *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-45.0f, -1.75f, -75.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pilar.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-45.0f, -1.75f, -107.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-45.0f, -1.75f, -170.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-45.0f, -1.75f, -215.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-45.0f, -1.75f, -255.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-45.0f, -1.75f, -285.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pilar.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -75.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pilar.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -107.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -170.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -215.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -255.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -285.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pilar.Draw(staticShader);
+
+		/******************* PARED FRONTAL *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-75.0f, -1.75f, -75.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-135.0f, -1.75f, -75.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-270.0f, -1.75f, -75.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-330.0f, -1.75f, -75.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+		
+		/******************* PARED TRASERA *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-75.0f, -1.75f, -285.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-135.0f, -1.75f, -285.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-197.0f, -1.75f, -285.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-260.0f, -1.75f, -285.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-300.0f, -1.75f, -285.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-330.0f, -1.75f, -285.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		pared.Draw(staticShader);
 
 
-		//________________________________________________________________________________________________________
-		//____________________________________ COCHE AZUL ________________________________________________________
-		//________________________________________________________________________________________________________
+		/******************* FUENTE *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-200.0f, -1.75f, -180.0f));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		fuente.Draw(staticShader);
+
+		/******************* ELEMENTOS DEL PARQUE *******************/
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, -100.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		/******************* AUTO AZUL *******************/
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(car_pos_ini_x + car_x, 5.5f, car_pos_ini_z + car_z));
-		//model = glm::translate(glm::mat4(1.0f), glm::vec3(car_x, 5.5f, car_z));
 		model = glm::rotate(model, glm::radians(90.0f + car_direction), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.6f));
 		staticShader.setMat4("model", model);
 		car_1.Draw(staticShader);
 
+		/******************* AUTO ROJO *******************/
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(200.0f, 5.5f, -200.0f));
 		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.6f));
 		staticShader.setMat4("model", model);
 		car_2.Draw(staticShader);
 
-		// Dino 
-		/*
-		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -2.75f, 0.0f));
-		model = glm::scale(model, glm::vec3(10.0f));
-		staticShader.setMat4("model", model);
-		dino_1.Draw(staticShader);
-
-		
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(250.0f, 0.0f, -10.0f));
-		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		*/
-		//________________________________________________________________________________________________________
-		//________________________________________ PEZ ___________________________________________________________
-		//________________________________________________________________________________________________________
-		
-		//body
+		/******************* PESCADO *******************/
+		/******************* CUERPO PESCADO *******************/
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(fish_pos_ini_x, fish_pos_ini_y, fish_pos_ini_z));
 		model = glm::translate(model, glm::vec3(fish_x, fish_y, fish_z));
 		model = glm::rotate(model, glm::radians(fish_theta_x), glm::vec3(1.0f, 0.0f, 0.0));
@@ -945,7 +1237,7 @@ int main()
 		model = glm::scale(model, glm::vec3(2.0f));
 		staticShader.setMat4("model", model);
 		fish_body_1.Draw(staticShader);
-		//head
+		/******************* CABEZA PESCADO *******************/
 		model = glm::translate(tmp, glm::vec3(3.0f, 0.0, 0.0f));
 		model = glm::rotate(model, glm::radians(fish_angle_head_x), glm::vec3(1.0f, 0.0f, 0.0));
 		model = glm::rotate(model, glm::radians(fish_angle_head_y), glm::vec3(0.0f, 1.0f, 0.0));
@@ -961,7 +1253,7 @@ int main()
 		model = glm::scale(model, glm::vec3(2.0f));
 		staticShader.setMat4("model", model);
 		fish_body_2.Draw(staticShader);
-		//tail
+		/******************* COLA PESCADO *******************/
 		model = glm::translate(tmp, glm::vec3(-4.0f, 0.0, 0.0f));
 		model = glm::rotate(model, glm::radians(fish_angle_tail_x), glm::vec3(1.0f, 0.0f, 0.0));
 		model = glm::rotate(model, glm::radians(fish_angle_tail_y), glm::vec3(0.0f, 1.0f, 0.0));
@@ -970,135 +1262,83 @@ int main()
 		staticShader.setMat4("model", model);
 		fish_tail.Draw(staticShader);
 
-		//helice
-		/*
-	
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 5.5f, 0.0f));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(thetatest), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::scale(model, glm::vec3(0.6f));
+		/******************* DINOSAURIO *******************/
+		/******************* TORSO DINO *******************/
+		model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(dino_posX, dino_posY, dino_posZ));
+		model = glm::scale(model, glm::vec3(10.0f));
+		tmp = model = glm::rotate(model, glm::radians(dino_giro), glm::vec3(0.0f, 1.0f, 0.0));
 		staticShader.setMat4("model", model);
-		helice.Draw(staticShader);
+		dino_torso.Draw(staticShader);
 
+		/******************* PIERNA DERECHA *******************/
+		model = glm::translate(tmp, glm::vec3(-0.2f, 0.1f, 0.45f));
+		model = glm::rotate(model, glm::radians(dino_rotPiernaDer), glm::vec3(1.0f, 0.0f, 0.0));
+		staticShader.setMat4("model", model);
+		dino_pata_der.Draw(staticShader);
+
+		/******************* PIERNA IZQUIERDA *******************/
+		model = glm::translate(tmp, glm::vec3(0.1f, 0.1f, 0.42f));
+		model = glm::rotate(model, glm::radians(dino_rotPiernaIzq), glm::vec3(1.0f, 0.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		dino_pata_izq.Draw(staticShader);
+
+		/******************* BRAZO DERECHO *******************/
+		model = glm::translate(tmp, glm::vec3(-0.01f, 0.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		dino_brazo_der.Draw(staticShader);
+
+		/******************* BRAZO IZQUIERDO *******************/
+		model = glm::translate(tmp, glm::vec3(0.15f, 0.1f, 1.35f));
+		staticShader.setMat4("model", model);
+		dino_brazo_izq.Draw(staticShader);
+
+		/******************* COLA DINOSAURIO *******************/
+		model = glm::translate(tmp, glm::vec3(0.0f, 0.13f, 0.14f));
+		model = glm::rotate(model, glm::radians(dino_rotCola), glm::vec3(0.0f, 0.0f, 1.0f));
+		staticShader.setMat4("model", model);
+		dino_cola.Draw(staticShader);
+
+		/******************* CUELLO DINOSAURIO *******************/
+		model = glm::translate(tmp, glm::vec3(0.0f, 0.32f, 1.3f));
+		staticShader.setMat4("model", model);
+		dino_cuello.Draw(staticShader);
+
+		/******************* QUIJADA DINOSAURIO *******************/
+		model = glm::translate(tmp, glm::vec3(0.0f, 0.65f, 1.72f));
+		model = glm::rotate(model, glm::radians(dino_rotBoca), glm::vec3(1.0f, 0.0f, 0.0f));
+		staticShader.setMat4("model", model);
+		dino_cabeza_inf.Draw(staticShader);
+
+		/******************* FRENTE DINOSAURIO *******************/
+		model = glm::translate(tmp, glm::vec3(0.0f, 0.80f, 1.72f));
+		staticShader.setMat4("model", model);
+		dino_cabeza_sup.Draw(staticShader);
+
+		/******************* HELICOPTERO *******************/
+		/******************* CUERPO HELICOPTERO *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(helicoptero_x + 45.0f, helicoptero_y + 315.0f, helicoptero_z - 180.0f));
+		model = glm::rotate(model, glm::radians(hel_direccion), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.7f));
+		staticShader.setMat4("model", model);
+		helicoptero.Draw(staticShader);
 		
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 5.5f, 0.0f));
-		model = glm::rotate(model, glm::radians(thetatest), glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::scale(model, glm::vec3(0.6f));
+		/******************* HELICE GRANDE *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(heliceGrande_x + 45.0f, heliceGrande_y + 322.0f, heliceGrande_z - 180.0f));
+		model = glm::rotate(model, glm::radians(rot_hel), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(giro_helices), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.7));
+		staticShader.setMat4("model", model);
+		helice_arriba.Draw(staticShader);
+		
+		/******************* HELICE CHICA *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(heliceChica_x + 45.0f, heliceChica_y + 319.0f, heliceChica_z -176.5f));
+		model = glm::rotate(model, glm::radians(hel_direccion), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(giro_helices), glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.7));
 		staticShader.setMat4("model", model);
 		helice_tras.Draw(staticShader);
-		*/
 
-
-
-
-		// -------------------------------------------------------------------------------------------------------------------------
-		// Carro
-		// -------------------------------------------------------------------------------------------------------------------------
-
-		/*
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, 2.3f));
-		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(2.0f));
-		staticShader.setMat4("model", model);
-		fish_head.Draw(staticShader);
-		*/
-		/*
-		model = glm::rotate(glm::mat4(1.0f), glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f));//estado inicial
-		model = glm::translate(model, glm::vec3(15.0f + movAuto_x, -1.0f, movAuto_z));
-		tmp = model = glm::rotate(model, glm::radians(orienta), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
-		staticShader.setMat4("model", model);
-		carro.Draw(staticShader);
-
-		model = glm::translate(tmp, glm::vec3(8.5f, 2.5f, 12.9f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
-		staticShader.setMat4("model", model);
-		llanta.Draw(staticShader);	//Izq delantera
-
-		model = glm::translate(tmp, glm::vec3(-8.5f, 2.5f, 12.9f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
-		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		staticShader.setMat4("model", model);
-		llanta.Draw(staticShader);	//Der delantera
-
-		model = glm::translate(tmp, glm::vec3(-8.5f, 2.5f, -14.5f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
-		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		staticShader.setMat4("model", model);
-		llanta.Draw(staticShader);	//Der trasera
-
-		model = glm::translate(tmp, glm::vec3(8.5f, 2.5f, -14.5f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
-		staticShader.setMat4("model", model);
-		llanta.Draw(staticShader);	//Izq trase
-		*/
-
-		
-
-		// -------------------------------------------------------------------------------------------------------------------------
-		// Personaje
-		// -------------------------------------------------------------------------------------------------------------------------
-		/*
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
-		model = glm::translate(model, glm::vec3(posX, posY, posZ));
-		tmp = model = glm::rotate(model, glm::radians(giroMonito), glm::vec3(0.0f, 1.0f, 0.0));
-		staticShader.setMat4("model", model);
-		torso.Draw(staticShader);
-
-		//Pierna Der
-		model = glm::translate(tmp, glm::vec3(-0.5f, 0.0f, -0.1f));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
-		model = glm::rotate(model, glm::radians(-rotRodIzq), glm::vec3(1.0f, 0.0f, 0.0f));
-		staticShader.setMat4("model", model);
-		piernaDer.Draw(staticShader);
-
-		//Pie Der
-		model = glm::translate(model, glm::vec3(0, -0.9f, -0.2f));
-		staticShader.setMat4("model", model);
-		botaDer.Draw(staticShader);
-
-		//Pierna Izq
-		model = glm::translate(tmp, glm::vec3(0.5f, 0.0f, -0.1f));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		staticShader.setMat4("model", model);
-		piernaIzq.Draw(staticShader);
-
-		//Pie Iz
-		model = glm::translate(model, glm::vec3(0, -0.9f, -0.2f));
-		staticShader.setMat4("model", model);
-		botaDer.Draw(staticShader);	//Izq trase
-
-		//Brazo derecho
-		model = glm::translate(tmp, glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::translate(model, glm::vec3(-0.75f, 2.5f, 0));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		staticShader.setMat4("model", model);
-		brazoDer.Draw(staticShader);
-
-		//Brazo izquierdo
-		model = glm::translate(tmp, glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::translate(model, glm::vec3(0.75f, 2.5f, 0));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-		staticShader.setMat4("model", model);
-		brazoIzq.Draw(staticShader);
-
-		//Cabeza
-		model = glm::translate(tmp, glm::vec3(0.0f, -1.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
-		model = glm::translate(model, glm::vec3(0.0f, 2.5f, 0));
-		staticShader.setMat4("model", model);
-		cabeza.Draw(staticShader);
-
-		//mi cubito
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, 20.0f));
-		//model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(3.0f));
-		staticShader.setMat4("model", model);
-		cubito.Draw(staticShader);
-		*/
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Termina Escenario
 		// -------------------------------------------------------------------------------------------------------------------------
@@ -1144,20 +1384,6 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 		camera.ProcessKeyboard(RIGHT, (float)deltaTime);
 	//To Configure Model
-	/*
-	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
-		fish_theta_x +=2.0f;
-	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
-		fish_theta_y += 2.0f;
-	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
-		fish_theta_z += 2.0f;
-	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
-		fish_theta_x -= 2.0f;
-	if (glfwGetKey(window, GLFW_KEY_H) == GLFW_PRESS)
-		fish_theta_y -= 2.0f;
-	if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
-		fish_theta_z -= 2.0f;
-	*/
 	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
 		fish_theta_x += 2.0f;
 	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
@@ -1171,21 +1397,6 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
 		fish_theta_z -= 2.0f;
 
-	/*
-	if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
-		fish_angle_head_x++;
-	if (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS)
-		fish_angle_head_y++;
-	if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
-		fish_angle_head_z++;
-	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS)
-		fish_angle_head_x--;
-	if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
-		fish_angle_head_y--;
-	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
-		fish_angle_head_z--;
-	*/
-	
 	if (glfwGetKey(window, GLFW_KEY_F5) == GLFW_PRESS)
 		thetatest--;
 	if (glfwGetKey(window, GLFW_KEY_F6) == GLFW_PRESS)
@@ -1195,7 +1406,6 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		lightPosition.x++;
 	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
 		lightPosition.x--;
-
 
 	//variables de contruccion manual
 	if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
@@ -1223,11 +1433,11 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		fish_theta_x -= 0.5f;
 
 
-	//Car animation
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-		animacion ^= true;
+	///******************* ANIMACION AUTO *******************/
+	//if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+	//	animacion ^= true;
 
-	//animacion compleja de auto
+	/******************* ANIMACION COMPLEJA AUTO *******************/
 	if (key == GLFW_KEY_F2 && action == GLFW_PRESS)
 		activate_car_animation ^= true;// compuerta para cambiar el estado
 	if (key == GLFW_KEY_F2 && action == GLFW_PRESS && car_state == -1) {
@@ -1236,7 +1446,8 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		car_state = 0;
 		activate_car_animation = false;
 	}
-	// animacion compleja del Pez
+	
+	/******************* ANIMACION COMPLEJA PESCADO *******************/
 	if (key == GLFW_KEY_F1 && action == GLFW_PRESS)
 		activate_fish_animation ^= true;// compuerta para cambiar el estado
 	if (key == GLFW_KEY_F1 && action == GLFW_PRESS && fish_state == -1) {
@@ -1265,11 +1476,9 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		fish_phi_mov = 0.0f;
 
 	}
-		
 
-
-	//To play KeyFrame animation 
-	if (key == GLFW_KEY_P && action == GLFW_PRESS)
+	//******************* ANIMACION COMPLEJA DINOSAURIO *******************/
+	if (key == GLFW_KEY_F3 && action == GLFW_PRESS)
 	{
 		if (play == false && (FrameIndex > 1))
 		{
@@ -1289,6 +1498,10 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		}
 	}
 
+	//******************* ANIMACION COMPLEJA HELICOPTERO *******************/
+	if (key == GLFW_KEY_F4 && action == GLFW_PRESS)
+		activate_hel_animation ^= true;// compuerta para cambiar el estado
+
 	//To Save a KeyFrame
 	if (key == GLFW_KEY_L && action == GLFW_PRESS)
 	{
@@ -1297,6 +1510,8 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 			saveFrame();
 		}
 	}
+
+
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
