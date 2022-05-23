@@ -16,10 +16,4 @@ Debug/
 .vs/Project/v16/Browse.VC.db-shm
 .vs/Project/v16/Browse.VC.opendb
 
-.vs/Project/v17/Browse.VC.db-wal
-.vs/Project/v17/.suo
-.vs/Project/v17/Browse.VC.db
-.vs/Project/v17/.suo
-.vs/Project/v17/Browse.VC.db-shm
-.vs/Project/v17/Browse.VC.opendb
-.vs/Project/v17/ipch/AutoPCH/2df810b9207912b/FINAL.ipch
+.vs/Project/v17/*
