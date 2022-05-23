@@ -1,5 +1,5 @@
 ﻿/*
-	* PROYECTO FINAL - LAB. COMPUTACIÓN GRAFICA E INTERACCIÓN HUMANO-COMPUTADORA
+	* PROYECTO FINAL - COMPUTACIÓN GRAFICA E INTERACCIÓN HUMANO-COMPUTADORA
 	* Integrantes:
 	* - Aguilar González Oscar
 	* - Báez Cadena Diestefano Michel
@@ -167,15 +167,12 @@ float	dino_incX = 0.0f,
 //variables helicoptero
 float	giro_helices = 0.0f,
 		rot_hel = -90.0f,
-		helicoptero_x = 0.0f,
-		helicoptero_y = 0.0f,
-		helicoptero_z = 0.0f,
-		heliceGrande_x = -30.0f,
-		heliceGrande_y = 0.0f,
-		heliceGrande_z = 0.0f,
-		heliceChica_x = 46.0f,
-		heliceChica_y = 0.0f,
-		heliceChica_z = 0.0f,
+		cuerpo_x = 0.0f,
+		cuerpo_y = 0.0f,
+		cuerpo_z = 0.0f,
+		helices_x = 0.0f,
+		helices_y = 0.0f,
+		helices_z = 0.0f,
 		hel_direccion = -90.0f;
 
 int		hel_state = 0;
@@ -211,9 +208,6 @@ int playIndex = 0;
 
 void saveFrame(void)
 {
-	//printf("frameindex %d\n", FrameIndex);
-	std::cout << "Frame Index = " << FrameIndex << std::endl;
-
 	KeyFrame[FrameIndex].posX = posX;
 	KeyFrame[FrameIndex].posY = posY;
 	KeyFrame[FrameIndex].posZ = posZ;
@@ -251,8 +245,6 @@ void animate(void)
 			playIndex++;
 			if (playIndex > FrameIndex - 2)	//end of total animation?
 			{
-				std::cout << "Animation ended" << std::endl;
-				//printf("termina anim\n");
 				playIndex = 0;
 				play = false;
 			}
@@ -269,23 +261,15 @@ void animate(void)
 			dino_posX += dino_incX;
 			dino_posY += dino_incY;
 			dino_posZ += dino_incZ;
-
 			dino_anguloDer += dino_rotPiernaDerInc;
 			dino_anguloIzq -= dino_rotPiernaIzqInc;
-
 			dino_rotPiernaDer = 30 * sin(dino_anguloDer);
 			dino_rotPiernaIzq = 30 * sin(dino_anguloIzq);
-
 			dino_anguloBoca += dino_rotBocaInc;
-
 			dino_anguloCola += dino_rotColaInc;
-
 			dino_rotBoca = 15 * sin(dino_anguloBoca);
-
 			dino_rotCola = 30 * sin(dino_anguloCola);
-
 			dino_giro += dino_giroInc;
-
 			i_curr_steps++;
 		}
 	}
@@ -296,7 +280,6 @@ void animate(void)
 		if (car_state == 0) {
 			car_z += 0.0f;
 			car_x += 1.0f;
-			cout << "state 0= " << car_state << std::endl;
 			if(car_x >= 50.0f){
 				car_state = 1;
 				car_pos_ini_x = 250.f;
@@ -305,13 +288,11 @@ void animate(void)
 		}
 		//dar vuelta en reversa
 		if (car_state == 1) {
-			cout << "state1= " << car_state << std::endl;
 			if (car_theta1 >= 4.6 && car_theta1 <= 6.28) {
 				car_x = 100.0f * cos(car_theta1);
 				car_z = (100.0f * sin(car_theta1)) + 100.f;
 				car_theta1 += 0.01f;
 				car_direction -= .55f;
-				cout << "theta1= " << car_theta1 << std::endl;
 				if (car_theta1 >= 6.28) {
 					// cambio de estado reinicio de variables
 					// y reinico de variables de cambio
@@ -325,8 +306,6 @@ void animate(void)
 		}
 		//movimiento Recto
 		if (car_state == 2) {
-			cout << "state= " << car_state << std::endl;
-			cout << "Z=  " << car_z << std::endl;
 			car_x += 0.0f;
 			car_z += 0.5f;
 			car_direction -= .1f;
@@ -357,7 +336,6 @@ void animate(void)
 		}
 
 		if (car_state == 4) {
-			cout <<"X= "<<car_x << std::endl;
 			car_x -= 0.6f;
 			if (car_x <= -135.0f) {
 				car_state = 5;
@@ -365,14 +343,11 @@ void animate(void)
 				car_pos_ini_z = car_pos_ini_z + car_z;
 				car_z = 0;
 				car_x = 0;
-				cout << "state= " << car_state << std::endl;
 				car_theta1 = 4.71238898;//inicializando variable para el siguiente estado
 			}
 		}
 
 		if (car_state == 5) {
-			cout << "angle= " << car_theta1 << std::endl;
-			cout << "dir= " << car_direction << std::endl;
 			car_x = 100.0f * cos(car_theta1);
 			car_z = (100.0f * sin(car_theta1))+100.0f;
 			car_theta1 -= 0.01f;
@@ -388,9 +363,6 @@ void animate(void)
 		}
 
 		if (car_state ==6){
-			cout << "Z= " << car_z << std::endl;
-			cout << "dir= " << car_direction << std::endl;
-
 			car_z += 0.3;
 			if (car_direction <= -90.0f) {
 				car_direction += 0.0f;
@@ -411,8 +383,6 @@ void animate(void)
 		}
 
 		if (car_state == 7) {
-			cout << "my angle= " << car_theta1 << std::endl;
-			cout << "dir= " << car_direction << std::endl;
 			car_x = (50.0f * cos(car_theta1)) - 50.0f;
 			car_z = 50.0f * sin(car_theta1);
 			car_theta1 -= 0.01f;
@@ -438,14 +408,11 @@ void animate(void)
 				car_theta1 = 4.7123f;
 				car_state = -1;
 			}
-
 		}
-
-
 	}
+
 /******************* ANIMACION PESCADO ********************/
 	if (activate_fish_animation) {
-
 		if (fish_state == 0) {
 			fish_x = (aumento * cos(fish_phi_mov)) - 30.0f;
 			fish_z =  aumento * sin(fish_phi_mov);
@@ -453,12 +420,7 @@ void animate(void)
 			fish_phi_mov += 0.01f;
 			fish_y += 0.03;
 			fish_theta_y-=0.7;
-			
-			std::cout << "phi = " << fish_phi_mov << std::endl;
-			std::cout << "x = " << fish_x << std::endl;
-			std::cout << "z = " << fish_z << std::endl;
-			std::cout << "state = " << fish_state << std::endl;
-			
+
 			//cabeza
 			if (fish_y <= 16.0f) {
 				if (fish_angle_head_y <= -45.0f) { fish_angle_head_y += 0.0f; }
@@ -492,14 +454,12 @@ void animate(void)
 				fish_pos_ini_x = fish_pos_ini_x + fish_x;
 				fish_pos_ini_y = fish_pos_ini_y + fish_y;
 				fish_pos_ini_z = fish_pos_ini_z + fish_z;
-				std::cout << " px: " << fish_pos_ini_x << " py: " << fish_pos_ini_y << " pz: " << fish_pos_ini_z << std::endl;
 				fish_x = 0.0f;
 				fish_y = 0.0f;
 				fish_z = 0.0f;
 				//preparar angulo para siguente estado
 				fish_phi_mov = -1.570796327f;
 			}
-
 		}
 
 		if (fish_state == 1) {
@@ -507,19 +467,14 @@ void animate(void)
 			fish_y = ((5.0f * sin(-fish_phi_mov)) - 5.0f);
 			fish_x = (5.0f * cos(-fish_phi_mov));
 			fish_phi_mov -= 0.01f;
-			
 			fish_theta_y++;
-			
-			std::cout << "phi: " << fish_phi_mov<< std::endl;
+
 			if (fish_phi_mov <= -3.1416) {
 				//fish_state = -1;
 				fish_state = 2;
-				
-				std::cout << " x: " << fish_x << " y: " << fish_y << " z: " << fish_z << std::endl;
 				fish_pos_ini_x = fish_pos_ini_x + fish_x;
 				fish_pos_ini_y = fish_pos_ini_y + fish_y;
 				fish_pos_ini_z = fish_pos_ini_z + fish_z;
-				std::cout << " px: " << fish_pos_ini_x << " py: " << fish_pos_ini_y << " pz: " << fish_pos_ini_z << std::endl;
 				fish_x = 0.0f;
 				fish_y = 0.0f;
 				fish_z = 0.0f;
@@ -533,40 +488,33 @@ void animate(void)
 			fish_z = (10.0f * sin(fish_phi_mov - 0.2458f)-2.43332); //rotacion
 			fish_y = ((13.0f * sin(-fish_phi_mov)));
 			fish_x = (8.0 * cos(-fish_phi_mov) +8.0f);
-			std::cout << " x: " << fish_x<< " y: " << fish_y << " z: " << fish_z << std::endl;
 			fish_theta_x -= 0.3; //2
 			fish_theta_z += 0.2;
 			fish_phi_mov -= 0.01f;
 			
 			if (fish_phi_mov<=-4.7123f) {
 				fish_state = 3;
-				std::cout << " x: " << fish_x << " y: " << fish_y << " z: " << fish_z << std::endl;
 				fish_pos_ini_x = fish_pos_ini_x + fish_x;
 				fish_pos_ini_y = fish_pos_ini_y + fish_y;
 				fish_pos_ini_z = fish_pos_ini_z + fish_z;
-				std::cout << " px: " << fish_pos_ini_x << " py: " << fish_pos_ini_y << " pz: " << fish_pos_ini_z << std::endl;
 				fish_x = 0.0f;
 				fish_y = 0.0f;
 				fish_z = 0.0f;
 				fish_phi_mov = 1.570796;
 			}
-
 		}
 		
 		if (fish_state == 3) {
 			fish_z = (15.0f * sin(fish_phi_mov) - 15);
 			fish_x = (15.0f * cos(fish_phi_mov));
-			std::cout << " x: " << fish_x << " y: " << fish_y << " z: " << fish_z << std::endl;
 			fish_phi_mov -= 0.01;
 			fish_theta_y+=0.7f;
 			
 			if (fish_phi_mov <= 0.0f) {
 				fish_state = 4;
-				std::cout << " x: " << fish_x << " y: " << fish_y << " z: " << fish_z << std::endl;
 				fish_pos_ini_x = fish_pos_ini_x + fish_x;
 				fish_pos_ini_y = fish_pos_ini_y + fish_y;
 				fish_pos_ini_z = fish_pos_ini_z + fish_z;
-				std::cout << " px: " << fish_pos_ini_x << " py: " << fish_pos_ini_y << " pz: " << fish_pos_ini_z << std::endl;
 				fish_x = 0.0f;
 				fish_y = 0.0f;
 				fish_z = 0.0f;
@@ -614,16 +562,13 @@ void animate(void)
 				fish_angle_head_y += 0.2;
 			}
 
-			std::cout << " x: " << fish_x << " y: " << fish_y << " z: " << fish_z << std::endl;
 			if (fish_phi_mov>= 1.5707f) {
 				fish_y += 0.2; //altura maxima debe ser 33
 				if (fish_phi_mov >= 3.1415f) {
 					fish_state = 5;
-					std::cout << " x: " << fish_x << " y: " << fish_y << " z: " << fish_z << std::endl;
 					fish_pos_ini_x = fish_pos_ini_x + fish_x;
 					fish_pos_ini_y = fish_pos_ini_y + fish_y;
 					fish_pos_ini_z = fish_pos_ini_z + fish_z;
-					std::cout << " px: " << fish_pos_ini_x << " py: " << fish_pos_ini_y << " pz: " << fish_pos_ini_z << std::endl;
 					fish_x = 0.0f;
 					fish_y = 0.0f;
 					fish_z = 0.0f;
@@ -660,31 +605,27 @@ void animate(void)
 	if (activate_hel_animation) {
 		if (hel_state == 0) {
 			giro_helices += 8.0f;
-			helicoptero_y += 3.0f;
-			heliceGrande_y += 3.0f;
-			heliceChica_y += 3.0f;
+			cuerpo_y += 2.5f;
+			helices_y += 2.5f;
 
-			if (helicoptero_y >= 500.0f) {
+			if (cuerpo_y >= 500.0f) {
 				hel_state = 1;
 			}
 		}
 
 		if (hel_state == 1) {
 			giro_helices += 8.0f;
-			helicoptero_x -= 4.0f;
-			heliceGrande_x -= 4.0f;
-			heliceChica_x -= 4.0f;
+			cuerpo_x -= 4.0f;
+			helices_x -= 4.0f;
 
-			if (helicoptero_x <= -800.0f) {
+			if (cuerpo_x <= -800.0f) {
 				hel_direccion += 3.0f;
 				if (hel_direccion == 0.0f) {
 					hel_direccion += 0.0f;
-					helicoptero_x = -800.0f;
-					heliceGrande_x = -800.0f;
-					heliceChica_x = -796.5f;
-					helicoptero_z = -260.0f;
-					heliceGrande_z = -230.0f;
-					heliceChica_z = -306.0f;
+					cuerpo_x = -800.0f;
+					helices_x = -800.0f;
+					cuerpo_z = 0.0f;
+					helices_z = 0.0f;
 					hel_state = 2;
 				}
 
@@ -695,19 +636,12 @@ void animate(void)
 			giro_helices += 8.0f;
 			rot_hel = 0.0f;
 
-			helicoptero_z += 4.0f;
-			heliceGrande_z += 4.0f;
-			heliceChica_z += 4.0f;
+			cuerpo_z += 4.0f;
+			helices_z += 4.0f;
 
-			if (helicoptero_z >= 540.0f) {
+			if (cuerpo_z >= 800.0f) {
 				hel_direccion += 3.0f;
 				if (hel_direccion == 135.0f) {
-					helicoptero_x = -800.0f;
-					heliceGrande_x = -780.2737f;
-					heliceChica_x = -834.552;// -869.957f;
-					helicoptero_z = 540.0f;
-					heliceGrande_z = 520.2737f;
-					heliceChica_z = 570.569f;
 					hel_state = 3;
 				}
 			}
@@ -716,42 +650,46 @@ void animate(void)
 		if (hel_state == 3) {
 			giro_helices += 8.0f;
 			rot_hel = 135.0f;
+			cuerpo_z -= 4.0f;
+			helices_z -= 4.0f;
+			cuerpo_x += 4.0f;
+			helices_x += 4.0f;
 
-			helicoptero_z -= 4.0f;
-			heliceGrande_z -= 4.0f;
-			heliceChica_z -= 4.0f;
-			helicoptero_x += 4.0f;
-			heliceGrande_x += 4.0f;
-			heliceChica_x += 4.0f;
-
-			if (helicoptero_x >= 0.0f) {
+			if (cuerpo_x >= 0.0f) {
 				hel_direccion += 3.0f;
 				if (hel_direccion == 270.0f) {
-
-					helicoptero_x = 0.0f,
-						helicoptero_z = -260.0f,
-						heliceGrande_x = -30.0f,
-						heliceGrande_z = -260.0f,
-						heliceChica_x = 46.0f,
-						heliceChica_z = -256.5f,
-						hel_state = 4;
+					hel_state = 4;
 				}
 			}
 		}
+
 		if (hel_state == 4) {
 			giro_helices += 8.0f;
-			helicoptero_y -= 3.0f;
-			heliceGrande_y -= 3.0f;
-			heliceChica_y -= 3.0f;
+			cuerpo_x -= 4.0f;
+			helices_x -= 4.0f;
 
-			if (helicoptero_y <= 0.0f) {
-				hel_state = -1;
+			if (cuerpo_x <= 0.0f) {
+				hel_state = 5;
+			}
+		}
+
+		if (hel_state == 5) {
+			giro_helices += 8.0f;
+			cuerpo_y -= 2.5f;
+			helices_y -= 2.5f;
+
+			if (cuerpo_y <= 0.0f) {
+				hel_state = 0;
 				giro_helices = 0.0f;
+				activate_hel_animation = false;
+				giro_helices = 0.0f,
+					rot_hel = -90.0f,
+					hel_direccion = -90.0f;
 			}
 		}
 	}
 
-	/***************** ANIMACION PERONSA **********************/
+	/***************** ANIMACION PERSONA **********************/
 	if (activate_guy_animation) {
 		/***********estados de movimiento de extremidades**************/
 		if (guy_state_leg == 0) {
@@ -944,12 +882,12 @@ int main()
 
 	vector<std::string> faces
 	{
-		"resources/skybox/right.bmp",
-		"resources/skybox/left.bmp",
-		"resources/skybox/top.bmp",
-		"resources/skybox/bottom.bmp",
-		"resources/skybox/front.bmp",
-		"resources/skybox/back.bmp"
+		"resources/skybox/right.png",
+		"resources/skybox/left.png",
+		"resources/skybox/top.png",
+		"resources/skybox/bottom.png",
+		"resources/skybox/front.png",
+		"resources/skybox/back.png"
 	};
 
 	Skybox skybox = Skybox(faces);
@@ -1021,23 +959,21 @@ int main()
 	Model jaula("resources/objects/dinojaula/jaulaGrande.obj");
 
 	/******** MODELO HELICOPTERO ***********/
-	Model helicoptero("resources/objects/helicoptero/helicoptero.obj");
-	Model helice_arriba("resources/objects/helice/helice.obj");
-	Model helice_tras("resources/objects/helice_tras/helice_tras.obj");
+	Model cuerpo("resources/objects/helicoptero/cuerpo.obj");
+	Model helices("resources/objects/helicoptero/helices.obj");
+
 	/******** MODELO MURO DINOPARQUE *********/
 	Model puerta("resources/objects/gate/modern_gaste.obj");
 	Model gate_muro("resources/objects/gate/gate_p2.obj");
 	Model reja("resources/objects/enrejado/enrejado.obj");
-	/* MODELO PERSONA*/
+
+	/************ MODELO PERSONA *************/
 	Model guy_head("resources/objects/guy_animation/guy_head.obj");
 	Model guy_torso("resources/objects/guy_animation/guy_torso.obj");
 	Model guy_brazo_izq("resources/objects/guy_animation/brazo_izq.obj");
 	Model guy_brazo_der("resources/objects/guy_animation/brazo_der.obj");
 	Model guy_leg_izq("resources/objects/guy_animation/guy_leg_izq.obj");
 	Model guy_leg_der("resources/objects/guy_animation/guy_leg_right.obj");
-
-	
-	Model soldado("resources/objects/soldado/sold.obj");
 
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
@@ -1143,9 +1079,6 @@ int main()
 		// --------------------
 		lastFrame = SDL_GetTicks();
 
-		// input
-		// -----
-		//my_input(window);
 		animate();
 
 		// render
@@ -1182,7 +1115,6 @@ int main()
 
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 tmp = glm::mat4(1.0f);
-		//glm::mat4 tmp = glm::mat4(1.0f);
 		// view/projection transformations
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 10000.0f);
 		glm::mat4 view = camera.GetViewMatrix();
@@ -1480,27 +1412,20 @@ int main()
 
 		/******************* HELICOPTERO *******************/
 		/******************* CUERPO HELICOPTERO *******************/
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(helicoptero_x + 45.0f, helicoptero_y + 315.0f, helicoptero_z - 180.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(cuerpo_x + 10.0f, cuerpo_y + 306.0f, cuerpo_z - 170.0f));
 		model = glm::rotate(model, glm::radians(hel_direccion), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.7f));
 		staticShader.setMat4("model", model);
-		helicoptero.Draw(staticShader);
-		
+		cuerpo.Draw(staticShader);
+
 		/******************* HELICE GRANDE *******************/
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(heliceGrande_x + 45.0f, heliceGrande_y + 322.0f, heliceGrande_z - 180.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(helices_x + 10.0f, helices_y + 306.0f, helices_z - 170.0f));
 		model = glm::rotate(model, glm::radians(rot_hel), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::rotate(model, glm::radians(giro_helices), glm::vec3(0.0f, 1.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.7));
 		staticShader.setMat4("model", model);
-		helice_arriba.Draw(staticShader);
-		
-		/******************* HELICE CHICA *******************/
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(heliceChica_x + 45.0f, heliceChica_y + 319.0f, heliceChica_z -176.5f));
-		model = glm::rotate(model, glm::radians(hel_direccion), glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::rotate(model, glm::radians(giro_helices), glm::vec3(1.0f, 0.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.7));
-		staticShader.setMat4("model", model);
-		helice_tras.Draw(staticShader);
+		helices.Draw(staticShader);
+
 		/******************** DINOSAURIOS: MODEL0 1 ***********************/
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-500.0f, -1.5f, 230.0f));
 		model = glm::scale(model, glm::vec3(0.5));
@@ -1669,8 +1594,6 @@ int main()
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Termina Escenario
-		// -------------------------------------------------------------------------------------------------------------------------
-
 		//-------------------------------------------------------------------------------------
 		// draw skybox as last
 		// -------------------
@@ -1679,7 +1602,6 @@ int main()
 
 		// Limitar el framerate a 60
 		deltaTime = SDL_GetTicks() - lastFrame; // time for full 1 loop
-		//std::cout <<"frame time = " << frameTime << " milli sec"<< std::endl;
 		if (deltaTime < LOOP_TIME)
 		{
 			SDL_Delay((int)(LOOP_TIME - deltaTime));
@@ -1755,11 +1677,6 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 	if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS)
 		fish_theta_x -= 0.5f;
 
-
-	///******************* ANIMACION AUTO *******************/
-	//if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-	//	animacion ^= true;
-
 	/******************* ANIMACION COMPLEJA AUTO *******************/
 	if (key == GLFW_KEY_F2 && action == GLFW_PRESS)
 		activate_car_animation ^= true;// compuerta para cambiar el estado
@@ -1797,27 +1714,6 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		fish_angle_tail_y = 0.0f;
 		fish_angle_tail_z = 0.0f;
 		fish_phi_mov = 0.0f;
-
-	}
-	/*************** ANIMACION PERSONA ******************/
-
-	if (key == GLFW_KEY_F5 && action == GLFW_PRESS) {
-		activate_guy_animation ^= true;
-	}
-		
-	if (key == GLFW_KEY_F5 && action == GLFW_PRESS && guy_state == -1) {
-		guy_angle_leg = 0.0f;
-		guy_angle_arm = 0.0f;
-		guy_pos_ini_x = 100.0f;
-		guy_pos_ini_z = 100.0f;
-		guy_posx = 0.0f;
-		guy_posz = 0.0f;
-		guy_phi = 0.0f;
-		guy_oriented = -90.0f;
-		guy_angle_neck = 0.0f;
-		guy_state_leg = 0;
-		guy_state = 0;
-		activate_guy_animation = false;
 	}
 
 	//******************* ANIMACION COMPLEJA DINOSAURIO *******************/
@@ -1854,7 +1750,25 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		}
 	}
 
+	/*************** ANIMACION PERSONA ******************/
+	if (key == GLFW_KEY_F5 && action == GLFW_PRESS) {
+		activate_guy_animation ^= true;
+	}
 
+	if (key == GLFW_KEY_F5 && action == GLFW_PRESS && guy_state == -1) {
+		guy_angle_leg = 0.0f;
+		guy_angle_arm = 0.0f;
+		guy_pos_ini_x = 100.0f;
+		guy_pos_ini_z = 100.0f;
+		guy_posx = 0.0f;
+		guy_posz = 0.0f;
+		guy_phi = 0.0f;
+		guy_oriented = -90.0f;
+		guy_angle_neck = 0.0f;
+		guy_state_leg = 0;
+		guy_state = 0;
+		activate_guy_animation = false;
+	}
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
