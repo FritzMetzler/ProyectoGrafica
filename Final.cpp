@@ -30,6 +30,7 @@
 #include <iostream>
 
 /*#pragma comment(lib, "winmm.lib")*/
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -112,6 +113,22 @@ float	fish_angle_head_x = 0.0f,
 bool	activate_fish_animation = false;
 int		fish_state = 0,
 		fish_sub_state=0;
+
+/********* variables de la persona *********/
+bool	activate_guy_animation = false;
+float	guy_angle_leg = 0.0f,
+		guy_angle_arm = 0.0f,
+		guy_pos_ini_x = 100.0f,
+		guy_pos_ini_z = 100.0f,
+		guy_posx = 0.0f,
+		guy_posz = 0.0f,
+		guy_phi = 0.0f,
+		guy_oriented = -90.0f,
+		guy_angle_neck = 0.0f;
+
+
+int		guy_state_leg = 0,
+		guy_state = 0;
 
 //Keyframes (Manipulación y dibujo)
 float	posX = 0.0f,
@@ -733,6 +750,141 @@ void animate(void)
 			}
 		}
 	}
+
+	/***************** ANIMACION PERONSA **********************/
+	if (activate_guy_animation) {
+		/***********estados de movimiento de extremidades**************/
+		if (guy_state_leg == 0) {
+			guy_angle_leg -= 1.0f;
+			if (guy_angle_leg <= -30.0f) {
+				guy_state_leg = 1;
+			}
+
+		}
+
+		if (guy_state_leg == 1) {
+			guy_angle_leg += 1.0f;
+			if (guy_angle_leg >= 30.0f) {
+				guy_state_leg = 0;
+			}
+
+		}
+
+		if (guy_state_leg == 0) {
+			guy_angle_arm -= 1.0f;
+			if (guy_angle_leg <= -30.0f) {
+				guy_state_leg = 1;
+			}
+
+		}
+
+		if (guy_state_leg == 1) {
+			guy_angle_arm += 1.0f;
+			if (guy_angle_leg >= 30.0f) {
+				guy_state_leg = 0;
+			}
+
+		}
+
+		if (guy_state_leg == 3) {
+			guy_angle_arm = 0.0f;
+			guy_angle_leg = 0.0f;
+		}
+		/***********estados de movimiento total**************/
+		if (guy_state == 0) {
+			guy_posx -= 0.5f;
+			if (guy_posx <= -70.0f) {
+				guy_state_leg = 3;
+				guy_state = 1;
+			}
+		}
+
+		if (guy_state == 1) {
+			guy_angle_neck -= 1.0f;
+			if (guy_angle_neck <= -50.0f) {
+				guy_state = 2;
+				guy_state_leg = 0;
+				guy_pos_ini_x = guy_pos_ini_x + guy_posx;
+				guy_pos_ini_z = guy_pos_ini_z + guy_posz;
+				guy_posx = 0.0f;
+				guy_posz = 0.0f;
+			}
+		}
+
+		if (guy_state == 2) {
+			guy_angle_neck += 1.0f;
+			guy_posx -= 0.4;
+			guy_posz -= 0.7;
+			guy_oriented = -135.0f;
+			if (guy_angle_neck >= 0.0f) {
+				guy_angle_neck = 0.0f;
+			}
+			if (guy_posx <= -90.0f) {
+				guy_state = 3;
+				guy_state_leg = 0;
+				guy_pos_ini_x = guy_pos_ini_x + guy_posx;
+				guy_pos_ini_z = guy_pos_ini_z + guy_posz;
+				guy_posx = 0.0f;
+				guy_posz = 0.0f;
+			}
+		}
+
+		if (guy_state == 3) {
+			guy_posx -= 0.5f;
+			guy_oriented = -90.0f;
+			if (guy_posx <= -100.0f) {
+				guy_state = 4;
+				guy_state_leg = 0;
+				guy_pos_ini_x = guy_pos_ini_x + guy_posx;
+				guy_pos_ini_z = guy_pos_ini_z + guy_posz;
+				guy_posx = 0.0f;
+				guy_posz = 0.0f;
+			}
+		}
+
+		if (guy_state == 4) {
+			guy_posx = 15 * sin(guy_phi);
+			guy_posz = 15 * cos(guy_phi) - 15.0f;
+			guy_phi -= 0.02;
+			guy_oriented -= 1.1;
+			if (guy_phi <= -1.5707) {
+				guy_state = 5;
+			}
+		}
+
+		if (guy_state == 5) {
+			guy_posx = 15 * sin(guy_phi);
+			guy_posz = 15 * cos(guy_phi) - 15.0f;
+			guy_phi -= 0.02;
+			guy_oriented -= 1.1;
+			if (guy_phi <= -1.5707) {
+				guy_state = 6;
+				guy_state_leg = 0;
+				guy_pos_ini_x = guy_pos_ini_x + guy_posx;
+				guy_pos_ini_z = guy_pos_ini_z + guy_posz;
+				guy_posx = 0.0f;
+				guy_posz = 0.0f;
+
+			}
+		}
+
+		if (guy_state == 6) {
+			guy_posz -= 0.5;
+			if (guy_posz <= -50.0f) {
+				guy_state = -1;
+				guy_state_leg = 3;
+				guy_pos_ini_x = guy_pos_ini_x + guy_posx;
+				guy_pos_ini_z = guy_pos_ini_z + guy_posz;
+				guy_posx = 0.0f;
+				guy_posz = 0.0f;
+				guy_phi = 0.0f;
+			}
+
+		}
+
+	}
+
+
 }
 
 void getResolution()
@@ -788,6 +940,7 @@ int main()
 	Shader staticShader("Shaders/shader_Lights.vs", "Shaders/shader_Lights.fs");
 	Shader skyboxShader("Shaders/skybox.vs", "Shaders/skybox.fs");
 	Shader animShader("Shaders/anim.vs", "Shaders/anim.fs");
+	Shader Rain("Shaders/particles_rain.vs", "Shaders/particles_rain.fs");
 
 	vector<std::string> faces
 	{
@@ -826,9 +979,12 @@ int main()
 	Model edificio2("resources/objects/edificio2/city3.obj");
 	Model pilar("resources/objects/pilar/pilar.obj");
 	Model pared("resources/objects/pared/pared.obj");
+	/************MODELOS DE LA JAULA*************/
+
+	/************MODELO DE ESCULTURA*************/
 
 	/******** MODELO FUENTE ***********/
-	Model fuente("resources/objects/fuente/fuente.obj");
+	Model escultura("resources/objects/escultura/estatua_dinosraurio.obj");
 	
 	/******** MODELOS ARBOLES ***********/
 	Model arbol1("resources/objects/arbol1/arbol1.obj");
@@ -845,7 +1001,7 @@ int main()
 	/******** MODELO ALBERCA ***********/
 	Model pool("resources/objects/alberca/picina.obj");
 
-	/******** MODELO DINOSAURIO ***********/
+	/******** MODELO DINOSAURIO ANIMADO ***********/
 	Model dino_brazo_izq("resources/objects/dino/brazo_izq/brazo_izq.obj");
 	Model dino_brazo_der("resources/objects/dino/brazo_der/brazo_der.obj");
 	Model dino_cola("resources/objects/dino/cola/cola.obj");
@@ -855,11 +1011,33 @@ int main()
 	Model dino_torso("resources/objects/dino/torso/torso.obj");
 	Model dino_cabeza_inf("resources/objects/dino/cabeza_inf/cabeza_inf.obj");
 	Model dino_cabeza_sup("resources/objects/dino/cabeza_sup/cabeza_sup.obj");
+	/********** MODELO DE DINOSAURIOS ********/
+	Model dino1("resources/objects/dino_TRI/tricera.obj");
+	Model dino2("resources/objects/tricera/dino.obj");
+	Model dino3("resources/objects/arlo/arlo.obj");
+	Model dino4("resources/objects/Stego/Stegosaurus.obj");
+	
+	/************MODELO DE JAULA*************/
+	Model jaula("resources/objects/dinojaula/jaulaGrande.obj");
 
 	/******** MODELO HELICOPTERO ***********/
 	Model helicoptero("resources/objects/helicoptero/helicoptero.obj");
 	Model helice_arriba("resources/objects/helice/helice.obj");
 	Model helice_tras("resources/objects/helice_tras/helice_tras.obj");
+	/******** MODELO MURO DINOPARQUE *********/
+	Model puerta("resources/objects/gate/modern_gaste.obj");
+	Model gate_muro("resources/objects/gate/gate_p2.obj");
+	Model reja("resources/objects/enrejado/enrejado.obj");
+	/* MODELO PERSONA*/
+	Model guy_head("resources/objects/guy_animation/guy_head.obj");
+	Model guy_torso("resources/objects/guy_animation/guy_torso.obj");
+	Model guy_brazo_izq("resources/objects/guy_animation/brazo_izq.obj");
+	Model guy_brazo_der("resources/objects/guy_animation/brazo_der.obj");
+	Model guy_leg_izq("resources/objects/guy_animation/guy_leg_izq.obj");
+	Model guy_leg_der("resources/objects/guy_animation/guy_leg_right.obj");
+
+	
+	Model soldado("resources/objects/soldado/sold.obj");
 
 	//Inicialización de KeyFrames
 	for (int i = 0; i < MAX_FRAMES; i++)
@@ -1004,6 +1182,7 @@ int main()
 
 		glm::mat4 model = glm::mat4(1.0f);
 		glm::mat4 tmp = glm::mat4(1.0f);
+		//glm::mat4 tmp = glm::mat4(1.0f);
 		// view/projection transformations
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 10000.0f);
 		glm::mat4 view = camera.GetViewMatrix();
@@ -1025,13 +1204,13 @@ int main()
 		
 		/******************* SUELO *******************/
 		model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, -1.75f, 0.0f));
-		model = glm::scale(model, glm::vec3(10.0f));
+		model = glm::translate(model, glm::vec3(-80.0f, -1.75f, 0.0f));
+		model = glm::scale(model, glm::vec3(12.5f, 1.0, 10.0));
 		staticShader.setMat4("model", model);
 		suelo.Draw(staticShader);
 
 		/******************* CANCHA *******************/
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(115.0f, 0.0f, 163.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(115.0f, -1.72f, 163.0f));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::scale(model, glm::vec3(2.7f, 4.0f, 4.0f));
 		staticShader.setMat4("model", model);
@@ -1075,7 +1254,7 @@ int main()
 		staticShader.setMat4("model", model);
 		arbusto.Draw(staticShader);
 
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-355.0f, 2.0f, 265.0f));
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-340.0f, 2.0f, 265.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::scale(model, glm::vec3(30.0f, 30.0f, 30.0f));
 		staticShader.setMat4("model", model);
@@ -1105,33 +1284,6 @@ int main()
 		pared.Draw(staticShader);
 
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-45.0f, -1.75f, -285.0f));
-		model = glm::scale(model, glm::vec3(1.0));
-		staticShader.setMat4("model", model);
-		pilar.Draw(staticShader);
-
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -75.0f));
-		model = glm::scale(model, glm::vec3(1.0));
-		staticShader.setMat4("model", model);
-		pilar.Draw(staticShader);
-
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -107.0f));
-		model = glm::scale(model, glm::vec3(1.0));
-		staticShader.setMat4("model", model);
-		pared.Draw(staticShader);
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -170.0f));
-		model = glm::scale(model, glm::vec3(1.0));
-		staticShader.setMat4("model", model);
-		pared.Draw(staticShader);
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -215.0f));
-		model = glm::scale(model, glm::vec3(1.0));
-		staticShader.setMat4("model", model);
-		pared.Draw(staticShader);
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -255.0f));
-		model = glm::scale(model, glm::vec3(1.0));
-		staticShader.setMat4("model", model);
-		pared.Draw(staticShader);
-
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-362.0f, -1.75f, -285.0f));
 		model = glm::scale(model, glm::vec3(1.0));
 		staticShader.setMat4("model", model);
 		pilar.Draw(staticShader);
@@ -1198,16 +1350,27 @@ int main()
 		staticShader.setMat4("model", model);
 		pared.Draw(staticShader);
 
-
-		/******************* FUENTE *******************/
-		model = glm::translate(glm::mat4(1.0f), glm::vec3(-200.0f, -1.75f, -180.0f));
-		model = glm::scale(model, glm::vec3(2.0));
-		staticShader.setMat4("model", model);
-		fuente.Draw(staticShader);
-
 		/******************* ELEMENTOS DEL PARQUE *******************/
+		/******************* Escultura*******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-200.0f, -1.75f, -180.0f));
+		model = glm::scale(model, glm::vec3(6.0));
+		staticShader.setMat4("model", model);
+		escultura.Draw(staticShader);
 
+		//*************** ARBOL ******************
 		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, 0.0f, -100.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-320.0f, 0.0f, -100.0f));
+		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
+		staticShader.setMat4("model", model);
+		arbol2.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-330.0f, 0.0f, -270.0f));
 		model = glm::rotate(model, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));
 		staticShader.setMat4("model", model);
@@ -1338,6 +1501,171 @@ int main()
 		model = glm::scale(model, glm::vec3(0.7));
 		staticShader.setMat4("model", model);
 		helice_tras.Draw(staticShader);
+		/******************** DINOSAURIOS: MODEL0 1 ***********************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-500.0f, -1.5f, 230.0f));
+		model = glm::scale(model, glm::vec3(0.5));
+		staticShader.setMat4("model", model);
+		dino1.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-500.0f, -1.5f, 100.0f));
+		model = glm::rotate(model, glm::radians(230.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5));
+		staticShader.setMat4("model", model);
+		dino1.Draw(staticShader);
+		/******************** DINOSAURIOS: MODELO 2 ***********************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-430.0f, -1.5f, 230.0f));
+		model = glm::scale(model, glm::vec3(0.5));
+		staticShader.setMat4("model", model);
+		dino2.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-430.0f, -1.5f, 150.0f));
+		model = glm::rotate(model, glm::radians(-45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5));
+		staticShader.setMat4("model", model);
+		dino2.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-430.0f, -1.5f, -100.0f));
+		model = glm::rotate(model, glm::radians(-100.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.5));
+		staticShader.setMat4("model", model);
+		dino2.Draw(staticShader);
+		/******************** DINOSAURIOS: MODELO 3 ***********************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-100.0f, -1.5f, -200.0f));
+		model = glm::scale(model, glm::vec3(3.0));
+		staticShader.setMat4("model", model);
+		dino3.Draw(staticShader);
+
+		/******************** DINOSAURIOS: MODELO 4 ***********************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-430.0f, 0.0f, -230.0f));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		dino4.Draw(staticShader);
+
+		/****************** JAULA ********************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-430.0f, -1.5f, -230.0f));
+		model = glm::rotate(model, glm::radians(10.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0));
+		staticShader.setMat4("model", model);
+		jaula.Draw(staticShader);
+		/**************** ENREJADO *******************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, 51.0f, 260.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		reja.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, 51.0f, 215.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		reja.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, 51.0f, 170.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		reja.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, 51.0f, 125.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		reja.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, 51.0f, 80.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		reja.Draw(staticShader);
+
+		/*segunda parte*/
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, 51.0f, -265.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		reja.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, 51.0f, -220.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		reja.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, 51.0f, -175.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		reja.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, 51.0f, -130.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		reja.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, 51.0f, -98.0f));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(2.0));
+		staticShader.setMat4("model", model);
+		reja.Draw(staticShader);
+
+		/********************** PARED DINOSARURIOS ********************/
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, -1.5f, -10.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(3.15f));
+		staticShader.setMat4("model", model);
+		puerta.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, -1.5f, 226.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(3.15f));
+		staticShader.setMat4("model", model);
+		gate_muro.Draw(staticShader);
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(-360.0f, -1.5f, -228.0f));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(3.15f));
+		staticShader.setMat4("model", model);
+		gate_muro.Draw(staticShader);
+		/************************* MODELO PERSONA **************************/
+		//guy
+
+		model = glm::translate(glm::mat4(1.0f), glm::vec3(guy_pos_ini_x + guy_posx, 11.0f, guy_pos_ini_z + guy_posz));
+		tmp = model = glm::rotate(model, glm::radians(guy_oriented), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(6.0f));
+		staticShader.setMat4("model", model);
+		guy_torso.Draw(staticShader);
+
+		model = glm::translate(tmp, glm::vec3(0.4f, 4.0f, 0.0f));
+		model = glm::rotate(model, glm::radians(guy_angle_neck), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(6.0f));
+		staticShader.setMat4("model", model);
+		guy_head.Draw(staticShader);
+
+		model = glm::translate(tmp, glm::vec3(2.1f, 2.5f, 0.0f));
+		model = glm::rotate(model, glm::radians(guy_angle_arm), glm::vec3(1.0f, 0.0f, 0.0));
+		model = glm::scale(model, glm::vec3(6.0f));
+		staticShader.setMat4("model", model);
+		guy_brazo_izq.Draw(staticShader);
+
+		model = glm::translate(tmp, glm::vec3(-2.2f, 2.5f, 0.0f));
+		model = glm::rotate(model, glm::radians(-guy_angle_arm), glm::vec3(1.0f, 0.0f, 0.0));
+		model = glm::scale(model, glm::vec3(6.0f));
+		staticShader.setMat4("model", model);
+		guy_brazo_der.Draw(staticShader);
+
+		model = glm::translate(tmp, glm::vec3(-0.1f, -4.5, 0.0f));
+		model = glm::rotate(model, glm::radians(guy_angle_leg), glm::vec3(1.0f, 0.0f, 0.0));
+		model = glm::scale(model, glm::vec3(6.0f));
+		staticShader.setMat4("model", model);
+		guy_leg_izq.Draw(staticShader);
+
+		model = glm::translate(tmp, glm::vec3(-0.1f, -4.5, 0.0f));
+		model = glm::rotate(model, glm::radians(-guy_angle_leg), glm::vec3(1.0f, 0.0f, 0.0));
+		model = glm::scale(model, glm::vec3(6.0f));
+		staticShader.setMat4("model", model);
+		guy_leg_der.Draw(staticShader);
 
 		// -------------------------------------------------------------------------------------------------------------------------
 		// Termina Escenario
@@ -1396,11 +1724,6 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		fish_theta_y -= 2.0f;
 	if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS)
 		fish_theta_z -= 2.0f;
-
-	if (glfwGetKey(window, GLFW_KEY_F5) == GLFW_PRESS)
-		thetatest--;
-	if (glfwGetKey(window, GLFW_KEY_F6) == GLFW_PRESS)
-		thetatest++;
 
 	if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS)
 		lightPosition.x++;
@@ -1475,6 +1798,26 @@ void my_input(GLFWwindow *window, int key, int scancode, int action, int mode)
 		fish_angle_tail_z = 0.0f;
 		fish_phi_mov = 0.0f;
 
+	}
+	/*************** ANIMACION PERSONA ******************/
+
+	if (key == GLFW_KEY_F5 && action == GLFW_PRESS) {
+		activate_guy_animation ^= true;
+	}
+		
+	if (key == GLFW_KEY_F5 && action == GLFW_PRESS && guy_state == -1) {
+		guy_angle_leg = 0.0f;
+		guy_angle_arm = 0.0f;
+		guy_pos_ini_x = 100.0f;
+		guy_pos_ini_z = 100.0f;
+		guy_posx = 0.0f;
+		guy_posz = 0.0f;
+		guy_phi = 0.0f;
+		guy_oriented = -90.0f;
+		guy_angle_neck = 0.0f;
+		guy_state_leg = 0;
+		guy_state = 0;
+		activate_guy_animation = false;
 	}
 
 	//******************* ANIMACION COMPLEJA DINOSAURIO *******************/
