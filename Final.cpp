@@ -878,7 +878,6 @@ int main()
 	Shader staticShader("Shaders/shader_Lights.vs", "Shaders/shader_Lights.fs");
 	Shader skyboxShader("Shaders/skybox.vs", "Shaders/skybox.fs");
 	Shader animShader("Shaders/anim.vs", "Shaders/anim.fs");
-	Shader Rain("Shaders/particles_rain.vs", "Shaders/particles_rain.fs");
 
 	vector<std::string> faces
 	{

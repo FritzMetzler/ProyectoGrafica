@@ -49,31 +49,21 @@ D:\official\ProyectoGrafica\Final.cpp(786,19): warning C4305: '-=': truncamiento
 D:\official\ProyectoGrafica\Final.cpp(787,23): warning C4305: '-=': truncamiento de 'double' a 'float'
 D:\official\ProyectoGrafica\Final.cpp(796,19): warning C4305: '-=': truncamiento de 'double' a 'float'
 D:\official\ProyectoGrafica\Final.cpp(797,23): warning C4305: '-=': truncamiento de 'double' a 'float'
-D:\official\ProyectoGrafica\Final.cpp(1425,42): warning C4305: 'argumento': truncamiento de 'double' a 'T'
+D:\official\ProyectoGrafica\Final.cpp(1424,42): warning C4305: 'argumento': truncamiento de 'double' a 'T'
           with
           [
               T=float
           ]
+D:\official\ProyectoGrafica\Final.cpp(1788,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 D:\official\ProyectoGrafica\Final.cpp(1789,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\official\ProyectoGrafica\Final.cpp(1790,11): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+D:\official\ProyectoGrafica\Final.cpp(1793,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
 D:\official\ProyectoGrafica\Final.cpp(1794,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
-D:\official\ProyectoGrafica\Final.cpp(1795,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+D:\official\ProyectoGrafica\Final.cpp(1796,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
 D:\official\ProyectoGrafica\Final.cpp(1797,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\official\ProyectoGrafica\Final.cpp(1798,10): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-D:\official\ProyectoGrafica\Final.cpp(1806,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
-glfw3.lib(context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(context.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(init.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+D:\official\ProyectoGrafica\Final.cpp(1805,28): warning C4244: 'argumento': conversión de 'double' a 'float'; posible pérdida de datos
 glfw3.lib(input.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(input.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(monitor.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(vulkan.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(vulkan.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(window.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_init.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_init.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(win32_joystick.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_joystick.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_monitor.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_monitor.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_time.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_time.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(win32_thread.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_thread.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 glfw3.lib(win32_window.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(win32_window.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(wgl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(wgl_context.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(egl_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(egl_context.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-glfw3.lib(osmesa_context.obj) : warning LNK4099: no se encontró PDB 'glfw.pdb' con 'glfw3.lib(osmesa_context.obj)' o en 'D:\official\ProyectoGrafica\Debug\glfw.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
   Project.vcxproj -> D:\official\ProyectoGrafica\Debug\Project.exe
